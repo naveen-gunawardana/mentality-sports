@@ -880,6 +880,54 @@ export type Database = {
         }
         Relationships: []
       }
+      podcast_guest_applications: {
+        Row: {
+          admin_notes: string | null
+          affiliation: string | null
+          created_at: string
+          email: string
+          guest_type: string
+          id: string
+          name: string
+          phone: string | null
+          social_links: string | null
+          sport: string | null
+          status: string
+          story: string
+          topics: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          affiliation?: string | null
+          created_at?: string
+          email: string
+          guest_type?: string
+          id?: string
+          name: string
+          phone?: string | null
+          social_links?: string | null
+          sport?: string | null
+          status?: string
+          story: string
+          topics?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          affiliation?: string | null
+          created_at?: string
+          email?: string
+          guest_type?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          social_links?: string | null
+          sport?: string | null
+          status?: string
+          story?: string
+          topics?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

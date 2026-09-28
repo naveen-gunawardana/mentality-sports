@@ -7,6 +7,7 @@ import {
   ArrowLeft, Plus, Pencil, Trash2, X, Mic, Eye, EyeOff,
   ExternalLink, CheckCircle, AlertTriangle, Loader2,
 } from "lucide-react";
+import { GuestApplications } from "./guest-applications";
 
 interface Episode {
   id: string;
@@ -307,6 +308,8 @@ export default function AdminPodcastPage() {
           )}
         </div>
       </div>
+
+      <GuestApplications />
 
       {/* Pre-launch note */}
       <div className="mb-6 flex items-start gap-2.5 rounded-sm border border-orange-200 bg-orange-50/60 px-4 py-3">

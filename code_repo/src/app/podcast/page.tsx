@@ -245,6 +245,13 @@ export default function PodcastPage() {
             and what it really takes to stay in the game. No highlight reels.
             Just the real stuff nobody talks about.
           </p>
+          <a
+            href="/podcast/apply"
+            className="mt-8 inline-flex items-center gap-2 rounded-sm bg-orange-500 hover:bg-orange-400 px-6 py-3 text-sm font-bold text-white transition-colors"
+          >
+            <Mic className="h-4 w-4" />
+            Get on the Podcast
+          </a>
         </div>
       </div>
 
@@ -297,7 +304,7 @@ export default function PodcastPage() {
                 </p>
               </div>
               <a
-                href="/admin"
+                href="/podcast/apply"
                 className="shrink-0 inline-flex items-center gap-2 rounded-sm bg-navy hover:bg-navy/90 px-6 py-3 text-sm font-semibold text-white transition-colors"
               >
                 <Mic className="h-4 w-4 text-orange-400" />
