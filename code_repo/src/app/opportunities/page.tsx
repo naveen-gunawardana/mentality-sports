@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Mail, Heart } from "lucide-react";
+import { ArrowUpRight, Mail, Heart, Mic } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
 
@@ -41,6 +41,7 @@ const marqueeWords = [
   "SUMMER 2026",
   "INTERNSHIPS",
   "PARTNERSHIPS",
+  "PODCAST GUESTS",
   "GIVE BACK",
   "MAKE AN IMPACT",
 ];
@@ -127,6 +128,12 @@ export default function JoinUsPage() {
               className="inline-flex items-center gap-2 rounded-sm border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-bold text-[#f5f0e8] hover:bg-white/10 transition-colors"
             >
               <Heart className="h-4 w-4" /> Become a mentor
+            </Link>
+            <Link
+              href="/podcast/apply"
+              className="inline-flex items-center gap-2 rounded-sm border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-bold text-[#f5f0e8] hover:bg-white/10 transition-colors"
+            >
+              <Mic className="h-4 w-4" /> Get on the podcast
             </Link>
           </motion.div>
         </div>
@@ -288,6 +295,48 @@ export default function JoinUsPage() {
             </Reveal>
           </div>
 
+        </div>
+      </section>
+
+      {/* ─── PODCAST GUEST ───────────────────────────────────────────────── */}
+      <section className="bg-[#f5f0e8] pb-24 px-6 sm:px-8">
+        <div className="mx-auto max-w-7xl border-t border-[#0a1628]/10 pt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <Reveal className="mb-4">
+                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#e8703a] flex items-center gap-3">
+                  <span className="h-px w-8 bg-[#e8703a]" />
+                  Share Your Story
+                </p>
+              </Reveal>
+              <Reveal delay={0.05} className="mb-6">
+                <h2 className="font-bold text-[#0a1628] tracking-tight" style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}>
+                  Get on the Podcast
+                </h2>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <p className="text-[15px] text-[#0a1628]/70 leading-relaxed max-w-xl">
+                  We&apos;re looking for athletes, coaches, and mental performance experts with a story worth telling — the doubt, the pressure, the comebacks. Apply to be a guest and we&apos;ll reach out.
+                </p>
+              </Reveal>
+            </div>
+            <Reveal delay={0.12} className="flex flex-wrap gap-3 lg:justify-end">
+              <Link
+                href="/podcast/apply"
+                className="group inline-flex items-center gap-3 rounded-sm bg-[#e8703a] px-8 py-4 text-sm font-bold text-white hover:bg-[#0a1628] transition-colors"
+              >
+                <Mic className="h-4 w-4" />
+                Apply to Be a Guest
+                <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+              <Link
+                href="/podcast"
+                className="inline-flex items-center gap-2 rounded-sm border border-[#0a1628]/15 bg-white px-8 py-4 text-sm font-bold text-[#0a1628] hover:border-[#0a1628]/30 transition-colors"
+              >
+                Listen to episodes
+              </Link>
+            </Reveal>
+          </div>
         </div>
       </section>
 
