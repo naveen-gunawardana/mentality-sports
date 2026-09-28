@@ -306,7 +306,7 @@ export default function Home() {
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative flex flex-col bg-[#0c1628] min-h-svh overflow-hidden"
+        className="relative flex flex-col bg-[#0c1628] min-h-[calc(100svh-55px)] overflow-hidden"
         style={{ "--mx": "50%", "--my": "40%" } as React.CSSProperties}
       >
         {/* ── Right-side photo panel ── */}
@@ -378,7 +378,7 @@ export default function Home() {
         />
 
         {/* ── Main content ── */}
-        <div className="z-10 relative flex flex-col flex-1 justify-end mx-auto px-8 sm:px-12 lg:px-16 pt-16 pb-20 w-full max-w-7xl">
+        <div className="z-10 relative flex flex-col flex-1 justify-start mx-auto px-8 sm:px-12 lg:px-16 pt-12 lg:pt-8 pb-16 w-full max-w-7xl">
 
           {/* Eyebrow */}
           <motion.div
