@@ -126,7 +126,7 @@ export function Navigation() {
   const mediaActive = MEDIA.some((p) => pathname.startsWith(p.href));
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/96 backdrop-blur-md transform-gpu">
+    <nav className="sticky top-0 z-50 bg-white">
       <div className="h-[2px] w-full bg-orange-500" />
 
       <div className="border-b border-offWhite-300">

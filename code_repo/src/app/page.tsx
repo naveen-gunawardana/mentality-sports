@@ -378,7 +378,7 @@ export default function Home() {
         />
 
         {/* ── Main content ── */}
-        <div className="z-10 relative flex flex-col flex-1 justify-end mx-auto px-8 sm:px-12 lg:px-16 pt-32 pb-20 w-full max-w-7xl">
+        <div className="z-10 relative flex flex-col flex-1 justify-end mx-auto px-8 sm:px-12 lg:px-16 pt-16 pb-20 w-full max-w-7xl">
 
           {/* Eyebrow */}
           <motion.div
