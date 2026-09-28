@@ -36,7 +36,12 @@ export async function GET(request: NextRequest) {
         fetch(`${origin}/api/notify`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ type: "welcome", email: user.email, name: user.user_metadata.name }),
+          body: JSON.stringify({
+            type: "welcome",
+            email: user.email,
+            name: user.user_metadata.name,
+            role: user.user_metadata.role,
+          }),
         }).catch(() => {});
       }
       return NextResponse.redirect(`${origin}/dashboard`);

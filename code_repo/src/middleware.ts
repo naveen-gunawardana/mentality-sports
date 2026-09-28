@@ -32,9 +32,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  // Protect dashboard routes — send to signup if not logged in
+  // Protect dashboard routes — returning members are the likelier visitor, and
+  // /signin links to /signup for anyone new.
   if (!user && request.nextUrl.pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/signup", request.url));
+    return NextResponse.redirect(new URL("/signin", request.url));
   }
 
   // Protect the application flow — must be signed in

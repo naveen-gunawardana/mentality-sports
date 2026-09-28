@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -17,6 +17,14 @@ export default function SignInPage() {
   const [forgotEmail, setForgotEmail] = useState("");
   const [forgotStatus, setForgotStatus] = useState<"idle" | "sending" | "sent" | "error" | "not_found">("idle");
 
+  // The confirm link bounces here when it can't sign them in directly
+  // (e.g. opened in a different browser than the one they signed up in).
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("error") === "auth_callback_failed") {
+      setError("That link couldn't sign you in automatically. Sign in below to continue.");
+    }
+  }, []);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
@@ -26,7 +34,14 @@ export default function SignInPage() {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-      setError(error.message);
+      const m = error.message.toLowerCase();
+      setError(
+        m.includes("email not confirmed")
+          ? "Confirm your email first — check your inbox (and spam) for the link we sent."
+          : m.includes("invalid login credentials")
+          ? "That email and password don't match. Try again, or reset your password below."
+          : error.message,
+      );
       setLoading(false);
     } else {
       const redirect = new URLSearchParams(window.location.search).get("redirect");

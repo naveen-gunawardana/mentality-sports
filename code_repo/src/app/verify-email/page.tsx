@@ -13,14 +13,14 @@ export default function VerifyEmailPage() {
         </div>
         <h1 className="font-outfit text-2xl font-bold text-navy mb-2">Check your email</h1>
         <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-          We sent a confirmation link to your email address. Click the link to activate your account and get started.
+          You&apos;re in — your spot is saved. We sent a confirmation link to your email; click it to sign in to your dashboard.
         </p>
         <p className="text-xs text-muted-foreground">
-          Didn&apos;t receive it? Check your spam folder, or{" "}
-          <a href="/signup" className="text-navy font-medium underline underline-offset-2 hover:text-orange-500 transition-colors">
-            try signing up again
-          </a>
-          .
+          Didn&apos;t receive it? Check your spam folder, or email{" "}
+          <a href="mailto:hello@mentalitysports.com" className="text-navy font-medium underline underline-offset-2 hover:text-orange-500 transition-colors">
+            hello@mentalitysports.com
+          </a>{" "}
+          and we&apos;ll sort it out.
         </p>
       </div>
     </div>

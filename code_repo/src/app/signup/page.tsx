@@ -6,6 +6,11 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Logo } from "@/components/logo";
 import { ArrowRight, CheckCircle } from "lucide-react";
+import { SPORTS, PLAYER_GRADES, MIDDLE_SCHOOL_GRADES } from "@/lib/athlete-options";
+
+const inputClass =
+  "flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+const selectClass = `${inputClass} h-[38px]`;
 
 export default function SignupPage() {
   return (
@@ -18,17 +23,21 @@ export default function SignupPage() {
 function SignupForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  // Carried through to the application step so mentorship CTAs can pre-select intent.
-  const roleHint = searchParams.get("role") === "mentor" ? "mentor" : searchParams.get("role") === "player" ? "player" : null;
-
+  // Mentorship CTAs link here with ?role=mentor to pre-select intent.
+  const [role, setRole] = useState<"player" | "mentor">(
+    searchParams.get("role") === "mentor" ? "mentor" : "player",
+  );
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [sport, setSport] = useState("");
+  const [grade, setGrade] = useState("");
+  const [parentEmail, setParentEmail] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const applyHref = roleHint ? `/apply?role=${roleHint}` : "/apply";
+  const needsParent = role === "player" && MIDDLE_SCHOOL_GRADES.has(grade);
 
   // Supabase surfaces raw auth errors that mean nothing to a signup visitor
   // ("Email rate limit exceeded"). Map the ones users actually hit to copy that
@@ -59,11 +68,43 @@ function SignupForm() {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { name } },
+      options: {
+        data: { name, role },
+        // Land on the callback so the confirm link signs them straight in.
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
     });
 
     if (error) {
       setError(friendlyAuthError(error.message));
+      setLoading(false);
+      return;
+    }
+    // With confirmations on, an already-registered email "succeeds" with no
+    // identities instead of erroring.
+    if (!data.user || data.user.identities?.length === 0) {
+      setError(friendlyAuthError("already registered"));
+      setLoading(false);
+      return;
+    }
+
+    // Create the member profile now, before the email is confirmed, so
+    // signing up is the whole commitment — no second application step.
+    const res = await fetch("/api/create-profile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: data.user.id,
+        name,
+        role,
+        sport: sport ? [sport] : null,
+        playerProfile: role === "player" ? { grade, parent_email: needsParent ? parentEmail : null } : null,
+        mentorProfile: role === "mentor" ? {} : null,
+      }),
+    });
+    if (!res.ok) {
+      const json = await res.json().catch(() => ({}));
+      setError(json?.error ?? "Something went wrong creating your account. Please try again.");
       setLoading(false);
       return;
     }
@@ -72,7 +113,7 @@ function SignupForm() {
     if (!data.session) {
       router.push("/verify-email");
     } else {
-      router.push(applyHref);
+      router.push("/dashboard");
       router.refresh();
     }
   }
@@ -85,17 +126,38 @@ function SignupForm() {
         </div>
         <h1 className="text-2xl font-bold text-navy mb-1.5">Create your account</h1>
         <p className="text-sm text-muted-foreground">
-          One quick step to get in the door. You can apply to be matched, RSVP to sessions, and track courses once you&apos;re in.
+          One quick form and you&apos;re in. Free, always.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid grid-cols-2 gap-2" role="radiogroup" aria-label="I want to">
+          {([
+            ["player", "Get a mentor"],
+            ["mentor", "Be a mentor"],
+          ] as const).map(([value, label]) => (
+            <button
+              key={value}
+              type="button"
+              role="radio"
+              aria-checked={role === value}
+              onClick={() => setRole(value)}
+              className={`rounded-md border px-3 py-2.5 text-sm font-semibold transition-colors ${
+                role === value
+                  ? "border-navy bg-navy text-white"
+                  : "border-input bg-background text-navy hover:border-navy/40"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
         <div>
           <label className="mb-1.5 block text-sm font-medium text-foreground">Full name</label>
           <input
             type="text" value={name} onChange={(e) => setName(e.target.value)} required
             placeholder="Your full name"
-            className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className={inputClass}
           />
         </div>
         <div>
@@ -103,7 +165,7 @@ function SignupForm() {
           <input
             type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
             placeholder="your@email.com"
-            className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className={inputClass}
           />
         </div>
         <div>
@@ -111,9 +173,48 @@ function SignupForm() {
           <input
             type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6}
             placeholder="••••••••"
-            className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className={inputClass}
           />
         </div>
+
+        <div className={role === "player" ? "grid grid-cols-2 gap-3" : ""}>
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-foreground">Sport</label>
+            <select
+              value={sport} onChange={(e) => setSport(e.target.value)} required
+              className={selectClass}
+            >
+              <option value="" disabled>Choose…</option>
+              {SPORTS.map((s) => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+          {role === "player" && (
+            <div>
+              <label className="mb-1.5 block text-sm font-medium text-foreground">Grade</label>
+              <select
+                value={grade} onChange={(e) => setGrade(e.target.value)} required
+                className={selectClass}
+              >
+                <option value="" disabled>Choose…</option>
+                {PLAYER_GRADES.map((g) => <option key={g} value={g}>{g}</option>)}
+              </select>
+            </div>
+          )}
+        </div>
+
+        {needsParent && (
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-foreground">Parent or guardian email</label>
+            <input
+              type="email" value={parentEmail} onChange={(e) => setParentEmail(e.target.value)} required
+              placeholder="parent@email.com"
+              className={inputClass}
+            />
+            <p className="mt-1.5 text-xs text-muted-foreground">
+              Because you&apos;re in middle school, we keep a parent in the loop.
+            </p>
+          </div>
+        )}
 
         <label className="flex items-start gap-3 cursor-pointer">
           <input
@@ -143,7 +244,9 @@ function SignupForm() {
           <CheckCircle className="h-3.5 w-3.5 text-orange-500" /> What happens next
         </p>
         <p className="text-xs text-muted-foreground leading-relaxed">
-          After you create your account, you can <strong className="text-navy/80">apply to the 1-on-1 mentorship program</strong> — that&apos;s where you tell us about yourself so we can match you (or, for mentors, review your application).
+          {role === "player"
+            ? <>Confirm your email and you&apos;re in. We&apos;ll <strong className="text-navy/80">match you with a mentor</strong> who plays your sport and reach out by email.</>
+            : <>Confirm your email and you&apos;re in. We&apos;ll <strong className="text-navy/80">review your profile</strong> and reach out when we have an athlete for you.</>}
         </p>
       </div>
 

@@ -7,14 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import { UserPlus, Users, CheckCircle, ArrowRight, ArrowLeft } from "lucide-react";
+import { SPORTS, PLAYER_GRADES, MIDDLE_SCHOOL_GRADES } from "@/lib/athlete-options";
 
 type Role = "player" | "mentor";
 
-const sports = [
-  "Basketball", "Football", "Soccer", "Volleyball", "Baseball", "Softball",
-  "Track & Field", "Swimming", "Tennis", "Wrestling", "Lacrosse", "Hockey",
-  "Cross Country", "Golf", "Gymnastics", "Other",
-];
+const sports = SPORTS;
 
 const US_STATES = [
   "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA",
@@ -35,7 +32,7 @@ const COUNTRIES = [
   "Saudi Arabia", "Qatar", "Kuwait", "Other",
 ];
 
-const playerGrades = ["6th", "7th", "8th", "9th", "10th", "11th", "12th", "College"];
+const playerGrades = PLAYER_GRADES;
 
 const playerLevels = [
   "Middle school recreational",
@@ -92,8 +89,6 @@ const menteeAgePrefs = [
   "High school (9th–12th)",
   "Any age",
 ];
-
-const MIDDLE_SCHOOL_GRADES = new Set(["6th", "7th", "8th"]);
 
 export default function ApplyPage() {
   return (
