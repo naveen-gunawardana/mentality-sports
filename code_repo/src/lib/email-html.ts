@@ -46,7 +46,9 @@ export function markdownToEmailHtml(content: string): string {
       continue;
     }
     flush();
-    if (line.startsWith("### ")) {
+    if (/^\[pdf:https:\/\/[^\s\]]+\.pdf\]$/.test(t)) {
+      parts.push(`<p style="margin:14px 0;"><a href="${t.slice(5, -1)}" style="color:#C4633A;font-weight:600;text-decoration:underline;">Read this issue as a PDF →</a></p>`);
+    } else if (line.startsWith("### ")) {
       parts.push(`<h3 style="color:#14213D;font-size:18px;margin:22px 0 8px;">${inline(line.slice(4))}</h3>`);
     } else if (line.startsWith("## ")) {
       parts.push(`<h2 style="color:#14213D;font-size:22px;margin:26px 0 10px;">${inline(line.slice(3))}</h2>`);

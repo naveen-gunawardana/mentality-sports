@@ -5,9 +5,9 @@ import React from "react";
  * group-session descriptions, course/lesson notes, newsletter issues).
  *
  * Supports: `## h2`, `### h3`, standalone `**bold**` lead-ins, `- ` bullet
- * lists, inline `**bold**`, `[text](url)` links, and `[youtube:VIDEO_ID]`
- * embeds. Intentionally dependency-free and safe to call from server
- * components.
+ * lists, inline `**bold**`, `[text](url)` links, `[youtube:VIDEO_ID]`
+ * embeds, and `[pdf:https://…/file.pdf]` embeds. Intentionally
+ * dependency-free and safe to call from server components.
  */
 
 function renderInline(text: string, keyPrefix: string): React.ReactNode[] {
@@ -98,6 +98,36 @@ export function renderMarkdown(text: string): React.ReactNode[] {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="w-full h-full"
+          />
+        </div>
+      );
+    } else if (/^\[pdf:https:\/\/[^\s\]]+\.pdf\]$/.test(trimmed)) {
+      // Mobile browsers (iOS especially) only render the first page of an
+      // iframed PDF, so the open/download buttons are the real fallback.
+      const pdfUrl = trimmed.slice(5, -1);
+      elements.push(
+        <div key={i} className="my-8">
+          <div className="flex flex-wrap gap-2 mb-3">
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-sm bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600 transition-colors"
+            >
+              Open PDF
+            </a>
+            <a
+              href={pdfUrl}
+              download
+              className="inline-flex items-center rounded-sm border border-offWhite-300 px-4 py-2 text-sm font-semibold text-navy hover:border-orange-300 transition-colors"
+            >
+              Download
+            </a>
+          </div>
+          <iframe
+            src={pdfUrl}
+            title="Newsletter PDF"
+            className="w-full h-[80vh] min-h-[500px] rounded-sm border border-offWhite-300 bg-offWhite"
           />
         </div>
       );
