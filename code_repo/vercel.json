@@ -5,16 +5,8 @@
       "schedule": "0 0 * * *"
     },
     {
-      "path": "/api/cron/goals-nudge",
-      "schedule": "0 12 * * 4"
-    },
-    {
       "path": "/api/cron/first-message-nudge",
       "schedule": "0 16 * * *"
-    },
-    {
-      "path": "/api/cron/session-reminders",
-      "schedule": "0 15 * * *"
     }
   ]
 }

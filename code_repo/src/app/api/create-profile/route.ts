@@ -2,6 +2,11 @@ import { createClient } from "@supabase/supabase-js";
 import { createClient as createSessionClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import type { Database } from "@/lib/supabase/types";
+import { getResend } from "@/lib/resend";
+import { escapeHtml as esc } from "@/lib/email-html";
+import { EMAIL_FROM, BASE_URL } from "@/lib/email";
+
+const TEAM_INBOX = "officialmentalitysports@gmail.com";
 
 const admin = () =>
   createClient<Database>(
@@ -90,6 +95,28 @@ export async function POST(request: Request) {
       availability: str(m.availability),
       approved: false,
     });
+  }
+
+  // Tell the team right away — matching is manual, so a signup nobody sees is
+  // a signup that waits forever.
+  const resend = getResend();
+  if (resend) {
+    const p = playerProfile ?? {};
+    const details = [
+      strList(sport)?.join(", "),
+      role === "player" ? str(p.grade) : null,
+      role === "player" && str(p.parent_email) ? `parent: ${str(p.parent_email)}` : null,
+    ].filter(Boolean).join(" · ");
+    await resend.emails
+      .send({
+        from: EMAIL_FROM,
+        to: TEAM_INBOX,
+        subject: `New ${role === "player" ? "athlete" : "mentor"}: ${str(name)}`,
+        html: `<p><strong>${esc(str(name)!)}</strong> (${authUser.user.email ?? "no email"}) just signed up as ${role === "player" ? "an athlete" : "a mentor"}.</p>
+${details ? `<p>${esc(details)}</p>` : ""}
+<p><a href="${BASE_URL}/admin">${role === "player" ? "Match them" : "Review them"} in the admin dashboard →</a></p>`,
+      })
+      .catch((err) => console.error("signup alert failed:", err));
   }
 
   return NextResponse.json({ ok: true });

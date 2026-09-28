@@ -3,6 +3,10 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import type { Database } from "@/lib/supabase/types";
 import { EMAIL_FROM as FROM, BASE_URL } from "@/lib/email";
+import { escapeHtml as esc } from "@/lib/email-html";
+import { createClient as createSessionClient } from "@/lib/supabase/server";
+
+const STAFF_ROLES = ["admin", "outreach", "operations"];
 
 function getResend() {
   const key = process.env.RESEND_API_KEY;
@@ -29,6 +33,14 @@ export async function POST(request: Request) {
   // TODO: add RESEND_API_KEY to .env.local to enable email notifications
   if (!resend) return NextResponse.json({ ok: true, skipped: "no api key" });
 
+  // Every type except forgot_password acts on behalf of the signed-in caller,
+  // so nobody can use this route to send our emails to arbitrary addresses.
+  const { data: { user } } = await (await createSessionClient()).auth.getUser();
+  const isStaff = STAFF_ROLES.includes(user?.app_metadata?.role);
+  const forbidden = () => NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+  if (type !== "forgot_password" && !user) return forbidden();
+  if (["match_created", "mentor_approved", "article_approved"].includes(type) && !isStaff) return forbidden();
+
   try {
     if (type === "forgot_password") {
       const { email } = payload;
@@ -52,27 +64,6 @@ export async function POST(request: Request) {
 <p>— The Mentality Sports Team</p>`,
       });
 
-    } else if (type === "welcome") {
-      const { email, name, role } = payload;
-      const firstName = (name ?? "there").split(" ")[0];
-      await resend.emails.send({
-        from: FROM,
-        to: email,
-        subject: "Welcome to Mentality Sports",
-        html: `<p>Hi ${firstName},</p>
-<p>Welcome to Mentality Sports — your account is all set.</p>
-${role === "player"
-  ? `<p>You're on the list — our team will match you with a mentor soon. We'll reach out by email when you're matched.</p>`
-  : role === "mentor"
-  ? `<p>Our team is reviewing your mentor application. You'll hear back within a few days once you're approved.</p>`
-  : `<p>Here's what you can do next:</p>
-<ul>
-  <li><strong>Apply for 1-on-1 mentorship</strong> — get matched with a mentor who's lived it: <a href="${BASE_URL}/apply">${BASE_URL}/apply</a></li>
-  <li><strong>Explore the resource library</strong>: <a href="${BASE_URL}/advice">${BASE_URL}/advice</a></li>
-</ul>`}
-<p>— The Mentality Sports Team</p>`,
-      });
-
     } else if (type === "match_created") {
       const { playerEmail, playerName, mentorEmail, mentorName } = payload;
       await Promise.all([
@@ -80,8 +71,8 @@ ${role === "player"
           from: FROM,
           to: playerEmail,
           subject: "You've been matched with a mentor",
-          html: `<p>Hi ${playerName},</p>
-<p>Great news — you've been matched with <strong>${mentorName}</strong> on Mentality Sports.</p>
+          html: `<p>Hi ${esc(playerName)},</p>
+<p>Great news — you've been matched with <strong>${esc(mentorName)}</strong> on Mentality Sports.</p>
 <p>Head to your <a href="${BASE_URL}/dashboard">Locker Room</a> to send your first message and get started.</p>
 <p>— The Mentality Sports Team</p>`,
         }),
@@ -89,8 +80,8 @@ ${role === "player"
           from: FROM,
           to: mentorEmail,
           subject: "You've been matched with an athlete",
-          html: `<p>Hi ${mentorName},</p>
-<p>You've been matched with <strong>${playerName}</strong> on Mentality Sports.</p>
+          html: `<p>Hi ${esc(mentorName)},</p>
+<p>You've been matched with <strong>${esc(playerName)}</strong> on Mentality Sports.</p>
 <p>Head to your <a href="${BASE_URL}/dashboard">Locker Room</a> to introduce yourself and review their profile.</p>
 <p>— The Mentality Sports Team</p>`,
         }),
@@ -102,7 +93,7 @@ ${role === "player"
         from: FROM,
         to: email,
         subject: "Your Mentality Sports application has been approved",
-        html: `<p>Hi ${name},</p>
+        html: `<p>Hi ${esc(name)},</p>
 <p>Your application to become a mentor on Mentality Sports has been approved!</p>
 <p>We're now working on finding the right athlete for you. Once matched, you'll get another email and your mentee will appear in your <a href="${BASE_URL}/dashboard">Locker Room</a>.</p>
 <p>Thanks for giving back to the next generation of athletes.</p>
@@ -111,6 +102,7 @@ ${role === "player"
 
     } else if (type === "call_scheduled") {
       const { matchId, scheduledAt, proposedById, note } = payload;
+      if (proposedById !== user!.id) return forbidden();
       const admin = getAdmin();
 
       const { data: match } = await admin
@@ -119,6 +111,7 @@ ${role === "player"
         .eq("id", matchId)
         .single();
       if (!match) return NextResponse.json({ ok: true });
+      if (user!.id !== match.mentor_id && user!.id !== match.player_id) return forbidden();
 
       const recipientId = proposedById === match.mentor_id ? match.player_id : match.mentor_id;
 
@@ -139,15 +132,16 @@ ${role === "player"
         from: FROM,
         to: recipientEmail,
         subject: `Call scheduled for ${formatted}`,
-        html: `<p>Hi ${recipientProfile?.name ?? "there"},</p>
-<p><strong>${proposerProfile?.name ?? "Your match"}</strong> has scheduled a call with you for <strong>${formatted}</strong>.</p>
-${note ? `<p>Note: ${note}</p>` : ""}
+        html: `<p>Hi ${esc(recipientProfile?.name ?? "there")},</p>
+<p><strong>${esc(proposerProfile?.name ?? "Your match")}</strong> has scheduled a call with you for <strong>${formatted}</strong>.</p>
+${note ? `<p>Note: ${esc(String(note))}</p>` : ""}
 <p>See it in your <a href="${BASE_URL}/dashboard">Locker Room</a>.</p>
 <p>— The Mentality Sports Team</p>`,
       });
 
     } else if (type === "new_message") {
       const { matchId, senderId } = payload;
+      if (senderId !== user!.id) return forbidden();
       const admin = getAdmin();
 
       const { data: match } = await admin
@@ -156,6 +150,7 @@ ${note ? `<p>Note: ${note}</p>` : ""}
         .eq("id", matchId)
         .single();
       if (!match) return NextResponse.json({ ok: true });
+      if (user!.id !== match.mentor_id && user!.id !== match.player_id) return forbidden();
 
       const recipientId = senderId === match.mentor_id ? match.player_id : match.mentor_id;
 
@@ -187,8 +182,8 @@ ${note ? `<p>Note: ${note}</p>` : ""}
         from: FROM,
         to: recipientEmail,
         subject: `New message from ${senderProfile?.name ?? "your match"}`,
-        html: `<p>Hi ${recipientProfile?.name ?? "there"},</p>
-<p>You have a new message from <strong>${senderProfile?.name ?? "your match"}</strong> on Mentality Sports.</p>
+        html: `<p>Hi ${esc(recipientProfile?.name ?? "there")},</p>
+<p>You have a new message from <strong>${esc(senderProfile?.name ?? "your match")}</strong> on Mentality Sports.</p>
 <p><a href="${BASE_URL}/dashboard">Go to your Locker Room</a> to read and reply.</p>
 <p>— The Mentality Sports Team</p>`,
       });
@@ -204,8 +199,8 @@ ${note ? `<p>Note: ${note}</p>` : ""}
         from: FROM,
         to: authorEmail,
         subject: `Your article is now live on Mentality Sports`,
-        html: `<p>Hi ${authorName ?? "there"},</p>
-<p>Your article <strong>"${title}"</strong> has been approved and is now live in the advice library.</p>
+        html: `<p>Hi ${esc(authorName ?? "there")},</p>
+<p>Your article <strong>"${esc(title)}"</strong> has been approved and is now live in the advice library.</p>
 <p><a href="${BASE_URL}/advice/${slug}">Read it here</a></p>
 <p>Thank you for contributing to the community.</p>
 <p>— The Mentality Sports Team</p>`,
@@ -213,6 +208,7 @@ ${note ? `<p>Note: ${note}</p>` : ""}
 
     } else if (type === "certificate_request") {
       const { userId, role, programInfo } = payload;
+      if (userId !== user!.id) return forbidden();
       const admin = getAdmin();
       const { data: profile } = await admin.from("profiles").select("name").eq("id", userId).single();
       const userEmail = await getUserEmail(userId);
@@ -226,10 +222,10 @@ ${note ? `<p>Note: ${note}</p>` : ""}
         subject: `Certificate request — ${isMentor ? "Mentor" : "Athlete"}: ${profile?.name ?? userEmail ?? userId}`,
         html: `<p>A ${isMentor ? "mentor" : "athlete"} has requested their ${certName}.</p>
 <ul>
-  <li><strong>Name:</strong> ${profile?.name ?? "—"}</li>
+  <li><strong>Name:</strong> ${esc(profile?.name ?? "—")}</li>
   <li><strong>Email:</strong> ${userEmail ?? "—"}</li>
-  <li><strong>Role:</strong> ${role}</li>
-  ${programInfo ? `<li><strong>Program:</strong> ${programInfo}</li>` : ""}
+  <li><strong>Role:</strong> ${esc(String(role))}</li>
+  ${programInfo ? `<li><strong>Program:</strong> ${esc(String(programInfo))}</li>` : ""}
 </ul>
 <p>Please issue and send their ${certName}.</p>`,
       });
@@ -240,7 +236,7 @@ ${note ? `<p>Note: ${note}</p>` : ""}
           from: FROM,
           to: userEmail,
           subject: "We got your certificate request",
-          html: `<p>Hi ${(profile?.name ?? "there").split(" ")[0]},</p>
+          html: `<p>Hi ${esc((profile?.name ?? "there").split(" ")[0])},</p>
 <p>Thanks for completing your ${isMentor ? "mentorship" : "1-month program"}! We've received your request and our team will email you your <strong>${certName}</strong> shortly.</p>
 <p>— The Mentality Sports Team</p>`,
         });

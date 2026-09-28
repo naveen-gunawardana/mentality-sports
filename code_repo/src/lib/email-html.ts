@@ -5,7 +5,7 @@ import { BASE_URL } from "@/lib/email";
  * renderer supports (## / ### headings, **bold**, - bullets, [text](url),
  * paragraphs). Email clients require inline styles, so everything is inlined.
  */
-function escapeHtml(s: string): string {
+export function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")

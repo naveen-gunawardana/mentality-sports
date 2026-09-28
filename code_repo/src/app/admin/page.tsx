@@ -174,12 +174,20 @@ export default function AdminPage() {
   const playerSports = Array.from(new Set(players.flatMap(p => p.sport ?? []).filter(Boolean))) as string[];
   const mentorSports = Array.from(new Set(mentors.flatMap(m => m.sport ?? []).filter(Boolean))) as string[];
 
-  // Filtered lists
+  const daysWaiting = (p: Person) =>
+    p.created_at ? Math.floor((Date.now() - new Date(p.created_at).getTime()) / 86_400_000) : 0;
+  const waitingCount = players.filter(p => !matchedPlayerIds.has(p.id)).length;
+
+  // Filtered lists — athletes still waiting first, longest wait at the top.
   const filteredPlayers = players.filter(p => {
     if (playerSportFilter !== "all" && !p.sport?.includes(playerSportFilter)) return false;
     if (playerMatchFilter === "matched" && !matchedPlayerIds.has(p.id)) return false;
     if (playerMatchFilter === "unmatched" && matchedPlayerIds.has(p.id)) return false;
     return true;
+  }).sort((a, b) => {
+    const aWaiting = !matchedPlayerIds.has(a.id), bWaiting = !matchedPlayerIds.has(b.id);
+    if (aWaiting !== bWaiting) return aWaiting ? -1 : 1;
+    return aWaiting ? daysWaiting(b) - daysWaiting(a) : 0;
   });
 
   const filteredMentors = mentors.filter(m => {
@@ -308,6 +316,7 @@ export default function AdminPage() {
         <div className="flex gap-4 text-center">
           {[
             { label: "Players", value: players.length },
+            { label: "Waiting", value: waitingCount },
             { label: "Mentors", value: mentors.length },
             { label: "Matches", value: activeMatches.length },
             { label: "Approvals", value: pendingMentors.length },
@@ -556,7 +565,7 @@ export default function AdminPage() {
                     <div className="flex items-center gap-2 shrink-0 ml-2">
                       {match
                         ? <Badge variant="default" className="text-xs">Matched</Badge>
-                        : <Badge variant="outline" className="text-xs border-orange-300 text-orange-600">Waiting</Badge>
+                        : <Badge variant="outline" className="text-xs border-orange-300 text-orange-600">Waiting {daysWaiting(p)}d</Badge>
                       }
                       {isExpanded ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
                     </div>

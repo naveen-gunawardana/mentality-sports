@@ -1,16 +1,15 @@
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
+import { isAuthorizedCron } from "@/lib/cron-auth";
 import type { Database } from "@/lib/supabase/types";
 import { EMAIL_FROM as FROM, BASE_URL } from "@/lib/email";
 
 // This route is called by a daily cron job.
 // It sends a reminder email for any calls scheduled in the next 24 hours.
-// Set CRON_SECRET in env and pass it as ?secret=... to protect the endpoint.
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  if (searchParams.get("secret") !== process.env.CRON_SECRET) {
+  if (!isAuthorizedCron(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

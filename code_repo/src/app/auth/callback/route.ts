@@ -2,6 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { sendWelcomeEmail } from "@/lib/welcome-email";
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
@@ -33,16 +34,11 @@ export async function GET(request: NextRequest) {
       // Email confirmed — send welcome now (not at signup, to avoid two emails at once)
       const user = sessionData?.user;
       if (user?.email && user?.user_metadata?.name) {
-        fetch(`${origin}/api/notify`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            type: "welcome",
-            email: user.email,
-            name: user.user_metadata.name,
-            role: user.user_metadata.role,
-          }),
-        }).catch(() => {});
+        await sendWelcomeEmail({
+          email: user.email,
+          name: user.user_metadata.name,
+          role: user.user_metadata.role,
+        }).catch((err) => console.error("welcome email failed:", err));
       }
       return NextResponse.redirect(`${origin}/dashboard`);
     }
