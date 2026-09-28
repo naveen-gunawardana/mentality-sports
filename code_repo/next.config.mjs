@@ -20,6 +20,9 @@ const nextConfig = {
         destination: "/advice/:slug",
         permanent: true,
       },
+      // Group sessions and training were retired from the programs lineup.
+      { source: "/group-sessions/:path*", destination: "/programs", permanent: false },
+      { source: "/training/:path*", destination: "/programs", permanent: false },
       {
         source: "/donate",
         destination: "https://gofund.me/535c025ab",

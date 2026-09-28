@@ -1,7 +1,5 @@
 import {
   Users,
-  Video,
-  Dumbbell,
   BookOpen,
   Mail,
   Mic,
@@ -40,28 +38,6 @@ export const PROGRAMS: Program[] = [
     status: "live",
   },
   {
-    key: "group-sessions",
-    label: "Group Sessions",
-    title: "Group Sessions",
-    tagline: "Live workshops you can drop into",
-    description:
-      "Join live virtual sessions on confidence, pressure, identity, and more — hosted by athletes who get it. RSVP free with your member account.",
-    href: "/group-sessions",
-    Icon: Video,
-    status: "new",
-  },
-  {
-    key: "training",
-    label: "Training",
-    title: "Training & Courses",
-    tagline: "Workout plans + mental-game courses",
-    description:
-      "Self-paced video courses and training plans that build the body and the mind together. Watch anytime, track your progress.",
-    href: "/training",
-    Icon: Dumbbell,
-    status: "new",
-  },
-  {
     key: "resources",
     label: "Resources",
     title: "Resource Library",
@@ -89,7 +65,7 @@ export const PROGRAMS: Program[] = [
     title: "The Podcast",
     tagline: "Honest conversations on sport & mind",
     description:
-      "Real talk with athletes, mentors, and experts on the mental side of competing. Episode 1 is live now.",
+      "Real talk with athletes, mentors, and experts on the mental side of competing. New episodes every month.",
     href: "/podcast",
     Icon: Mic,
     status: "new",

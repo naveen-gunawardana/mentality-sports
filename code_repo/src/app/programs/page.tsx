@@ -6,7 +6,7 @@ import { NewsletterSignup } from "@/components/newsletter-signup";
 export const metadata = {
   title: "Programs · Mentality Sports",
   description:
-    "Every part of the mental game, in one place — 1-on-1 mentorship, live group sessions, training, resources, a newsletter, and more. All free.",
+    "Every part of the mental game, in one place — 1-on-1 mentorship, resources, a newsletter, and a podcast. All free.",
 };
 
 function statusPill(status: Program["status"], dark: boolean) {
@@ -124,7 +124,7 @@ export default function ProgramsPage() {
     <div>
       {/* Announcement bar */}
       <div className="bg-navy border-b border-white/10 text-center py-2.5 px-4 text-xs text-white/60 tracking-wide">
-        Mentality Sports is now a <span className="text-white font-semibold">full platform</span> — mentorship, live sessions, training, resources, and more.{" "}
+        Mentality Sports is now a <span className="text-white font-semibold">full platform</span> — mentorship, resources, a newsletter, and a podcast.{" "}
         <span className="text-orange-400 font-semibold">All free.</span>
       </div>
 
@@ -153,8 +153,8 @@ export default function ProgramsPage() {
           <p className="max-w-2xl text-[15px] leading-relaxed text-white/55">
             We started with one thing: pairing athletes 1-on-1 with mentors who&apos;ve lived the
             same mental battles. It worked — so we kept building. Today Mentality Sports is a home
-            for the whole mental side of sport: live sessions, training, a resource library, a
-            newsletter, and more on the way. Pick a door below. Every one of them is free.
+            for the whole mental side of sport: a resource library, a newsletter, a podcast, and
+            more on the way. Pick a door below. Every one of them is free.
           </p>
         </div>
       </div>

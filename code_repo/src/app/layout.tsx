@@ -300,8 +300,6 @@ export default function RootLayout({
                 <ul className="space-y-2.5 text-sm">
                   <li><a href="/programs" className="text-white/60 hover:text-white transition-colors">All Programs</a></li>
                   <li><a href="/mentorship" className="text-white/60 hover:text-white transition-colors">1-on-1 Mentorship</a></li>
-                  <li><a href="/group-sessions" className="text-white/60 hover:text-white transition-colors">Group Sessions</a></li>
-                  <li><a href="/training" className="text-white/60 hover:text-white transition-colors">Training & Courses</a></li>
                   <li><a href="/advice" className="text-white/60 hover:text-white transition-colors">Resource Library</a></li>
                   <li><a href="/newsletter" className="text-white/60 hover:text-white transition-colors">Newsletter</a></li>
                   <li><a href="/podcast" className="text-white/60 hover:text-white transition-colors">Podcast</a></li>

@@ -624,7 +624,7 @@ export default function Home() {
                 MORE THAN<br />MENTORSHIP.
               </h2>
               <p className="text-navy/55 leading-relaxed max-w-xl">
-                We started with 1-on-1 mentorship. Now Mentality Sports is a home for the whole mental side of sport — live sessions, training, resources, a newsletter, and a podcast on the way.
+                We started with 1-on-1 mentorship. Now Mentality Sports is a home for the whole mental side of sport — resources, a newsletter, and a podcast.
               </p>
             </div>
             <Link href="/programs" className="group inline-flex items-center gap-2 font-bold text-navy hover:text-orange-500 text-sm transition-colors shrink-0">
@@ -632,7 +632,7 @@ export default function Home() {
             </Link>
           </Reveal>
 
-          <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {PROGRAMS.map((p, i) => {
               const pill = programStatusPill[p.status];
               return (
