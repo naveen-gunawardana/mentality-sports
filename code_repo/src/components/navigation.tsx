@@ -9,10 +9,14 @@ import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import { Logo } from "@/components/logo";
 import { motion, AnimatePresence } from "framer-motion";
-import { PROGRAMS } from "@/lib/programs";
+import { PROGRAMS_BY_KEY } from "@/lib/programs";
+
+const MEDIA = [PROGRAMS_BY_KEY.podcast, PROGRAMS_BY_KEY.newsletter];
 
 const navItems = [
   { href: "/", label: "Home" },
+  { href: "/mentorship", label: "Mentorship" },
+  { href: "/advice", label: "Resources" },
   { href: "/about", label: "About" },
   { href: "/opportunities", label: "Join Us" },
   { href: "/dashboard", label: "Locker Room" },
@@ -27,8 +31,8 @@ const statusPill: Record<string, { text: string; cls: string } | null> = {
 export function Navigation() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [programsOpen, setProgramsOpen] = useState(false);
-  const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
+  const [mediaOpen, setMediaOpen] = useState(false);
+  const [mobileMediaOpen, setMobileMediaOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -114,14 +118,12 @@ export function Navigation() {
   // Close menus on route change
   useEffect(() => {
     setMobileOpen(false);
-    setProgramsOpen(false);
-    setMobileProgramsOpen(false);
+    setMediaOpen(false);
+    setMobileMediaOpen(false);
   }, [pathname]);
 
   const displayName = user?.user_metadata?.name ?? user?.email ?? "";
-  const programsActive = PROGRAMS.some(
-    (p) => p.href !== "/" && p.href.startsWith("/") && pathname.startsWith(p.href.split("?")[0]) && p.href !== "/signup?role=player"
-  ) || pathname.startsWith("/programs");
+  const mediaActive = MEDIA.some((p) => pathname.startsWith(p.href));
 
   return (
     <nav className="sticky top-0 z-50 bg-white/96 backdrop-blur-md transform-gpu">
@@ -140,69 +142,67 @@ export function Navigation() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
-            {/* Home */}
-            <NavLink href="/" label="Home" pathname={pathname} />
+            {navItems.slice(0, 3).map((item) => (
+              <NavLink key={item.href} href={item.href} label={item.label} pathname={pathname} />
+            ))}
 
-            {/* Programs dropdown */}
+            {/* Media dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setProgramsOpen(true)}
-              onMouseLeave={() => setProgramsOpen(false)}
+              onMouseEnter={() => setMediaOpen(true)}
+              onMouseLeave={() => setMediaOpen(false)}
             >
-              <Link
-                href="/programs"
+              <button
+                type="button"
+                onClick={() => setMediaOpen((v) => !v)}
+                aria-expanded={mediaOpen}
                 className={cn(
                   "relative flex flex-col items-center gap-[3px] transition-colors duration-150",
-                  programsActive ? "text-navy" : "text-navy/35 hover:text-navy/70"
+                  mediaActive ? "text-navy" : "text-navy/35 hover:text-navy/70"
                 )}
               >
                 <span className="text-[11px] font-bold uppercase tracking-[0.14em] inline-flex items-center gap-1">
-                  Programs
-                  <ChevronDown className={cn("h-3 w-3 transition-transform", programsOpen && "rotate-180")} />
+                  Media
+                  <ChevronDown className={cn("h-3 w-3 transition-transform", mediaOpen && "rotate-180")} />
                 </span>
-                {programsActive ? (
+                {mediaActive ? (
                   <motion.span layoutId="nav-dot" className="h-[3px] w-[3px] rounded-full bg-orange-500" transition={{ type: "spring", stiffness: 400, damping: 28 }} />
                 ) : (
                   <span className="h-[3px] w-[3px] rounded-full bg-transparent" />
                 )}
-              </Link>
+              </button>
 
               <AnimatePresence>
-                {programsOpen && (
+                {mediaOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
                     transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute left-1/2 top-full -translate-x-1/2 pt-3 w-[360px]"
+                    className="absolute left-1/2 top-full -translate-x-1/2 pt-3 w-[320px]"
                   >
                     <div className="rounded-sm border border-offWhite-300 bg-white shadow-xl shadow-navy/5 overflow-hidden">
-                      <div className="grid grid-cols-1">
-                        {PROGRAMS.map((p) => {
-                          const pill = statusPill[p.status];
-                          return (
-                            <Link
-                              key={p.key}
-                              href={p.href}
-                              className="group flex items-start gap-3 px-4 py-3 hover:bg-offWhite transition-colors border-b border-offWhite-200 last:border-0"
-                            >
-                              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-orange-500/10 group-hover:bg-orange-500/20 transition-colors">
-                                <p.Icon className="h-4 w-4 text-orange-500" />
+                      {MEDIA.map((p) => {
+                        const pill = statusPill[p.status];
+                        return (
+                          <Link
+                            key={p.key}
+                            href={p.href}
+                            className="group flex items-start gap-3 px-4 py-3 hover:bg-offWhite transition-colors border-b border-offWhite-200 last:border-0"
+                          >
+                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-orange-500/10 group-hover:bg-orange-500/20 transition-colors">
+                              <p.Icon className="h-4 w-4 text-orange-500" />
+                            </span>
+                            <span className="min-w-0">
+                              <span className="flex items-center gap-2">
+                                <span className="text-[13px] font-bold text-navy group-hover:text-orange-600 transition-colors">{p.label}</span>
+                                {pill && <span className={cn("rounded-full px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider", pill.cls)}>{pill.text}</span>}
                               </span>
-                              <span className="min-w-0">
-                                <span className="flex items-center gap-2">
-                                  <span className="text-[13px] font-bold text-navy group-hover:text-orange-600 transition-colors">{p.label}</span>
-                                  {pill && <span className={cn("rounded-full px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider", pill.cls)}>{pill.text}</span>}
-                                </span>
-                                <span className="block text-[11px] text-navy/45 leading-snug mt-0.5">{p.tagline}</span>
-                              </span>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                      <Link href="/programs" className="flex items-center justify-center gap-1.5 bg-navy px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white hover:bg-navy-700 transition-colors">
-                        All Programs <ArrowRight className="h-3 w-3" />
-                      </Link>
+                              <span className="block text-[11px] text-navy/45 leading-snug mt-0.5">{p.tagline}</span>
+                            </span>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </motion.div>
                 )}
@@ -210,7 +210,7 @@ export function Navigation() {
             </div>
 
             {/* Remaining links */}
-            {navItems.slice(1).map((item) => (
+            {navItems.slice(3).map((item) => (
               <NavLink key={item.href} href={item.href} label={item.label} pathname={pathname} badge={item.href === "/dashboard" ? unreadCount : 0} />
             ))}
           </div>
@@ -294,26 +294,24 @@ export function Navigation() {
             className="md:hidden overflow-hidden bg-white border-b border-offWhite-300"
           >
             <div className="px-4 pt-2 pb-4">
-              {/* Home */}
-              <MobileLink href="/" label="Home" pathname={pathname} onClick={() => setMobileOpen(false)} />
+              {navItems.slice(0, 3).map((item) => (
+                <MobileLink key={item.href} href={item.href} label={item.label} pathname={pathname} onClick={() => setMobileOpen(false)} />
+              ))}
 
-              {/* Programs accordion */}
+              {/* Media accordion */}
               <div className="border-b border-offWhite-300">
                 <button
                   type="button"
-                  onClick={() => setMobileProgramsOpen((v) => !v)}
-                  className="flex items-center justify-between py-3.5 w-full text-navy/60"
+                  onClick={() => setMobileMediaOpen((v) => !v)}
+                  className={cn("flex items-center justify-between py-3.5 w-full", mediaActive ? "text-navy" : "text-navy/40")}
                 >
-                  <span className="text-[11px] font-bold uppercase tracking-[0.14em]">Programs</span>
-                  <ChevronDown className={cn("h-4 w-4 transition-transform", mobileProgramsOpen && "rotate-180")} />
+                  <span className="text-[11px] font-bold uppercase tracking-[0.14em]">Media</span>
+                  <ChevronDown className={cn("h-4 w-4 transition-transform", mobileMediaOpen && "rotate-180")} />
                 </button>
                 <AnimatePresence initial={false}>
-                  {mobileProgramsOpen && (
+                  {mobileMediaOpen && (
                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden pb-2">
-                      <Link href="/programs" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 py-2 pl-2 text-[12px] font-bold text-navy">
-                        All Programs <ArrowRight className="h-3 w-3 text-orange-500" />
-                      </Link>
-                      {PROGRAMS.map((p) => (
+                      {MEDIA.map((p) => (
                         <Link key={p.key} href={p.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-2 pl-2">
                           <p.Icon className="h-4 w-4 text-orange-500 shrink-0" />
                           <span className="text-[12px] text-navy/65">{p.label}</span>
@@ -325,7 +323,7 @@ export function Navigation() {
                 </AnimatePresence>
               </div>
 
-              {navItems.slice(1).map((item) => (
+              {navItems.slice(3).map((item) => (
                 <MobileLink key={item.href} href={item.href} label={item.label} pathname={pathname} badge={item.href === "/dashboard" ? unreadCount : 0} onClick={() => setMobileOpen(false)} />
               ))}
 
