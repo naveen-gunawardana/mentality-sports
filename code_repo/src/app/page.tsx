@@ -73,6 +73,7 @@ function CountOnView({ end, suffix = "" }: { end: number; suffix?: string }) {
 // ── Data ──────────────────────────────────────────────────────────────────────
 const ticker = [
   "Athlete to Athlete",
+  "2-Minute Mental Reps",
   "1-on-1 Mentorship",
   "Built by Athletes Giving Back",
   "High School Athletes",
@@ -83,9 +84,19 @@ const ticker = [
 
 const features = [
   {
+    label: "Mental Reps",
+    Icon: Target,
+    detail: "Two-minute guided reps: a pre-game reset, a post-game debrief, and a bad day reset. Use them on your own from day one. No waiting on anyone.",
+  },
+  {
+    label: "Confidence Tracking",
+    Icon: TrendingUp,
+    detail: "Every rep logs how confident you felt. Over a season you see your own trend instead of guessing, and you can spot what helps.",
+  },
+  {
     label: "1-on-1 Mentorship",
     Icon: CheckCircle,
-    detail: "Matched with a current or former athlete who's been where you are. Ongoing. No time limits, no scripts.",
+    detail: "Ask for a current or former athlete who's been where you are. A four-week program of weekly check-ins, matched as volunteer spots open.",
   },
   {
     label: "Private Messaging",
@@ -98,27 +109,17 @@ const features = [
     detail: "Log your mental state, wins, and struggles after practices and games. Your mentor can see what you choose to share — and follow up accordingly.",
   },
   {
-    label: "Session Tracking",
-    Icon: Target,
-    detail: "Every check-in logged with topics covered, notes, and follow-ups. Nothing gets lost.",
-  },
-  {
     label: "Advice Library",
     Icon: BookOpen,
     detail: "A growing library of articles on confidence, anxiety, motivation, identity, and every mental challenge athletes face — written by people who've been there.",
   },
-  {
-    label: "Weekly Mental Goals",
-    Icon: CheckCircle,
-    detail: "Set and track weekly mental goals with your mentor. Effort, focus, attitude — the stuff that doesn't show up in box scores.",
-  },
 ];
 
 const steps = [
-  { n: "01", title: "Apply", desc: "Tell us your sport, level, and what you're working through mentally or emotionally. Takes 3 minutes.", Icon: PenLine },
-  { n: "02", title: "Get Matched", desc: "We review every application and match you with someone whose background fits what you're going through.", Icon: Users },
-  { n: "03", title: "Build It", desc: "Schedule calls when it works. No scripts, no agenda — just honest conversation.", Icon: MessageCircle },
-  { n: "04", title: "Go Deeper", desc: "Tap the article library, log reflections, track goals. The work doesn't stop between calls.", Icon: TrendingUp },
+  { n: "01", title: "Do a Rep", desc: "Two minutes before you compete: breathe, pick what you control, lock in a cue word. No account needed to try.", Icon: Target },
+  { n: "02", title: "Debrief", desc: "After the game, three honest questions. What went well, what you're letting go, what's next.", Icon: PenLine },
+  { n: "03", title: "Watch It Build", desc: "Your confidence trend and streak grow with every rep, so you can see the mental work paying off.", Icon: TrendingUp },
+  { n: "04", title: "Add a Mentor", desc: "Want a person in your corner? Ask for a current or former athlete in your sport for a four-week program.", Icon: Users },
 ];
 
 
@@ -133,7 +134,7 @@ const faqs = [
   },
   {
     q: "How does matching work?",
-    a: "You tell us your sport, level, and what you're working through mentally. We review every application and match you with a mentor whose background fits yours. It's not automated — we read every one.",
+    a: "From your Locker Room, tell us what you want help with. We read every request and match you with a mentor whose sport and background fit. Mentors are volunteers, so it can take a few weeks. Mental reps are there from day one while you wait.",
   },
   {
     q: "How often do I meet with my mentor?",
@@ -153,7 +154,7 @@ const faqs = [
   },
   {
     q: "What makes a Mentality Sports mentor qualified?",
-    a: "Their experience. Every mentor has competed at the college level and went through the same pressures you're facing — playing time anxiety, coach conflicts, identity after an injury, confidence gaps. That lived experience is the qualification.",
+    a: "Their experience. Mentors are current or former competitive athletes, most at the college level, who went through the same pressures you're facing: playing time, coach conflicts, coming back from injury, confidence gaps. We review every mentor before they're matched.",
   },
 ];
 
@@ -394,16 +395,16 @@ export default function Home() {
               className="block bg-orange-400 w-10 h-px origin-left"
             />
             <span className="font-bold text-[10px] text-orange-400 uppercase tracking-[0.35em]">
-              Athlete to Athlete · Free · All Sports
+              Mental Training for Athletes · Free · All Sports
             </span>
           </motion.div>
 
           {/* ── HEADLINE ── */}
-          <h1 aria-label="Your mind deserves a teammate" className="mb-8">
+          <h1 aria-label="Play like you practice" className="mb-8">
             {[
-              { text: "YOUR MIND", orange: false },
-              { text: "DESERVES A", orange: true },
-              { text: "TEAMMATE.", orange: false },
+              { text: "PLAY LIKE", orange: false },
+              { text: "YOU", orange: true },
+              { text: "PRACTICE.", orange: false },
             ].map(({ text, orange }, i) => (
               <div key={text} className="overflow-hidden leading-none">
                 <motion.span
@@ -441,7 +442,7 @@ export default function Home() {
               className="max-w-[340px] text-[15px] leading-relaxed"
               style={{ color: "rgba(255,255,255,0.52)" }}
             >
-              Paired with a current or former athlete who played through the same mental battles you&apos;re facing right now. Real people. Real experience. Free.
+              Nerves, mistakes you can&apos;t shake, playing scared. Two-minute mental reps before and after every game, and a mentor who&apos;s been there when you want one. Free.
             </motion.p>
 
             <motion.div
@@ -451,11 +452,11 @@ export default function Home() {
               className="flex flex-wrap gap-3 shrink-0"
             >
               <Link
-                href="/signup?role=player"
+                href="/reps/pregame"
                 className="group inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-400 px-7 py-4 font-bold text-white text-sm transition-all duration-200"
                 style={{ clipPath: "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))" }}
               >
-                Get Matched
+                Try a 2-Minute Rep
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
@@ -596,9 +597,9 @@ export default function Home() {
           {/* Stat row */}
           <Reveal delay={0.4} className="gap-0 grid grid-cols-3 mt-16 pt-10 border-white/10 border-t max-w-lg">
             {[
-              { n: 20, suffix: "+", label: "Sports covered" },
-              { n: 100, suffix: "%", label: "Athlete-led" },
-              { n: 1, suffix: "-on-1", label: "Every match" },
+              { n: 2, suffix: " min", label: "Per mental rep" },
+              { n: 100, suffix: "%", label: "Free for athletes" },
+              { n: 1, suffix: "-on-1", label: "Mentorship" },
             ].map((s) => (
               <div key={s.label} className="pr-8">
                 <p className="font-bold tabular-nums text-white text-3xl">
@@ -624,7 +625,7 @@ export default function Home() {
                 MORE THAN<br />MENTORSHIP.
               </h2>
               <p className="text-navy/55 leading-relaxed max-w-xl">
-                We started with 1-on-1 mentorship. Now Mentality Sports is a home for the whole mental side of sport — resources, a newsletter, and a podcast.
+                Mental reps you can use before and after every game, mentors who&apos;ve been there, and resources, a newsletter, and a podcast for the rest of the mental side of sport.
               </p>
             </div>
             <Link href="/programs" className="group inline-flex items-center gap-2 font-bold text-navy hover:text-orange-500 text-sm transition-colors shrink-0">
@@ -632,7 +633,7 @@ export default function Home() {
             </Link>
           </Reveal>
 
-          <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
             {PROGRAMS.map((p, i) => {
               const pill = programStatusPill[p.status];
               return (

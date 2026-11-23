@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { CalendarClock, BookOpen, X } from "lucide-react";
+import { CalendarClock, BookOpen, X, Flame } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { LogSessionForm } from "@/components/log-session-form";
 import { AvatarUpload } from "@/components/avatar-upload";
@@ -17,6 +17,8 @@ import { PostSessionNudge } from "@/components/post-session-nudge";
 import { DashboardRightPanel } from "@/components/dashboard-right-panel";
 import { ProgramArc } from "@/components/program-arc";
 import { CertificateRequest } from "@/components/certificate-request";
+import { MentalRepsPanel } from "@/components/mental-reps-panel";
+import { MentorRequestCard } from "@/components/mentor-request-card";
 
 interface Profile { name: string; sport: string[] | null; avatar_url: string | null }
 interface PlayerProfile { challenges: string[] | null; goal: string | null; grade: string | null; school: string | null; level: string[] | null }
@@ -204,21 +206,21 @@ export default function PlayerDashboard() {
               </div>
             )}
           </>
-        ) : (
-          <div className="rounded-lg border-2 border-orange-200 bg-orange-50 p-6 mb-8 flex items-start gap-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-orange-100 shrink-0">
-              <CalendarClock className="h-5 w-5 text-orange-500" />
-            </div>
-            <div>
-              <p className="font-semibold text-navy">You&apos;re on the list</p>
-              <p className="text-sm text-muted-foreground mt-1">
-                We&apos;re reviewing your application and finding the right mentor for you. Usually takes a few days — we&apos;ll email you when you&apos;re matched.
-              </p>
-            </div>
+        ) : null}
+        {userId && (
+          <div className="space-y-4 mb-10">
+            <MentalRepsPanel playerId={userId} />
+            {!completedMatch && (
+              <MentorRequestCard
+                playerId={userId}
+                initialChallenges={playerProfile?.challenges ?? null}
+                initialGoal={playerProfile?.goal ?? null}
+              />
+            )}
           </div>
         )}
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-navy/40 mb-4">Browse resources while you wait</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-navy/40 mb-4">Reading for between games</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
             {recommendedArticles.map((res) => (
               <Link key={res.slug} href={`/advice/${res.slug}`}
@@ -287,6 +289,14 @@ export default function PlayerDashboard() {
             <h1 className="text-xl font-bold text-navy tracking-tight leading-tight mt-0.5">Welcome back, {profile?.name?.split(" ")[0]}</h1>
           </div>
         </div>
+        <div className="flex items-center gap-2">
+        <Link
+          href="/reps"
+          className="inline-flex items-center gap-1.5 rounded-full ring-1 ring-navy/15 bg-white hover:bg-offWhite text-navy px-3 h-9 text-[12px] font-bold uppercase tracking-[0.1em] transition-all"
+        >
+          <Flame className="h-3.5 w-3.5 text-orange-500" />
+          Reps
+        </Link>
         <button
           type="button"
           onClick={() => setShowScheduleModal(true)}
@@ -296,6 +306,7 @@ export default function PlayerDashboard() {
           <CalendarClock className="h-3.5 w-3.5" />
           Call
         </button>
+        </div>
       </div>
 
       <ProgramArc done={sessionCount} programEnd={programEnd} className="mb-4 shrink-0" />

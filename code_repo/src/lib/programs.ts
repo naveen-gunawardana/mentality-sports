@@ -1,4 +1,5 @@
 import {
+  Target,
   Users,
   BookOpen,
   Mail,
@@ -26,6 +27,17 @@ export interface Program {
  * the Programs nav menu, the homepage programs section, and the /programs hub.
  */
 export const PROGRAMS: Program[] = [
+  {
+    key: "reps",
+    label: "Mental Reps",
+    title: "Mental Reps",
+    tagline: "Two minutes before and after you compete",
+    description:
+      "Guided reps you run on your own: a pre-game reset, a post-game debrief, and a bad day reset. Track your confidence game to game. Free, no waiting.",
+    href: "/reps",
+    Icon: Target,
+    status: "new",
+  },
   {
     key: "mentorship",
     label: "1-on-1 Mentorship",

@@ -245,24 +245,30 @@ export type Database = {
           content: string
           created_at: string | null
           id: string
+          mood: string | null
           player_id: string
           shared_with_mentor: boolean
+          title: string | null
           updated_at: string | null
         }
         Insert: {
           content: string
           created_at?: string | null
           id?: string
+          mood?: string | null
           player_id: string
           shared_with_mentor?: boolean
+          title?: string | null
           updated_at?: string | null
         }
         Update: {
           content?: string
           created_at?: string | null
           id?: string
+          mood?: string | null
           player_id?: string
           shared_with_mentor?: boolean
+          title?: string | null
           updated_at?: string | null
         }
         Relationships: [

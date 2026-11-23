@@ -3,12 +3,15 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Globe } from "lucide-react";
+import { confidenceOf } from "@/lib/reps";
 
 interface Reflection {
   id: string;
   content: string;
   created_at: string | null;
   player_id: string;
+  title: string | null;
+  mood: string | null;
 }
 
 interface Props {
@@ -25,7 +28,7 @@ export function MenteeReflections({ playerId, playerName }: Props) {
       const supabase = createClient();
       const { data } = await supabase
         .from("reflections")
-        .select("id, content, created_at, player_id")
+        .select("id, content, created_at, player_id, title, mood")
         .eq("player_id", playerId)
         .eq("shared_with_mentor", true)
         .order("created_at", { ascending: false });
@@ -60,6 +63,12 @@ export function MenteeReflections({ playerId, playerName }: Props) {
         <div className="space-y-3">
           {reflections.map((r) => (
             <div key={r.id} className="rounded-lg border border-offWhite-300 bg-white p-4">
+              {r.title && (
+                <p className="mb-1.5 flex items-center justify-between text-xs font-semibold text-orange-600">
+                  {r.title}
+                  {confidenceOf(r.mood) && <span className="text-navy/50">Confidence {r.mood}/10</span>}
+                </p>
+              )}
               <p className="text-sm text-navy leading-relaxed whitespace-pre-wrap">{r.content}</p>
               <p className="text-xs text-muted-foreground mt-2 pt-2 border-t border-offWhite-200">
                 {formatDate(r.created_at)}

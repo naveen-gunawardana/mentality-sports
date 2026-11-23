@@ -126,7 +126,9 @@ function SignupForm() {
         </div>
         <h1 className="text-2xl font-bold text-navy mb-1.5">Create your account</h1>
         <p className="text-sm text-muted-foreground">
-          One quick form and you&apos;re in. Free, always.
+          {searchParams.get("from") === "rep"
+            ? <>Your rep is saved on this device. Make an account to keep it and track your confidence.</>
+            : <>One quick form and you&apos;re in. Free, always.</>}
         </p>
       </div>
 
@@ -245,7 +247,7 @@ function SignupForm() {
         </p>
         <p className="text-xs text-muted-foreground leading-relaxed">
           {role === "player"
-            ? <>Confirm your email and you&apos;re in. We&apos;ll <strong className="text-navy/80">match you with a mentor</strong> who plays your sport and reach out by email.</>
+            ? <>Confirm your email and you&apos;re in. Your Locker Room has <strong className="text-navy/80">mental reps ready right away</strong>, and you can ask for a mentor who plays your sport from there.</>
             : <>Confirm your email and you&apos;re in. We&apos;ll <strong className="text-navy/80">review your profile</strong> and reach out when we have an athlete for you.</>}
         </p>
       </div>
