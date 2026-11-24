@@ -19,6 +19,7 @@ import { ProgramArc } from "@/components/program-arc";
 import { CertificateRequest } from "@/components/certificate-request";
 import { MentalRepsPanel } from "@/components/mental-reps-panel";
 import { MentorRequestCard } from "@/components/mentor-request-card";
+import { TeamCard } from "@/components/team-card";
 
 interface Profile { name: string; sport: string[] | null; avatar_url: string | null }
 interface PlayerProfile { challenges: string[] | null; goal: string | null; grade: string | null; school: string | null; level: string[] | null }
@@ -210,6 +211,7 @@ export default function PlayerDashboard() {
         {userId && (
           <div className="space-y-4 mb-10">
             <MentalRepsPanel playerId={userId} />
+            <TeamCard playerId={userId} />
             {!completedMatch && (
               <MentorRequestCard
                 playerId={userId}

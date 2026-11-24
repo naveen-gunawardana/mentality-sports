@@ -28,7 +28,7 @@ export async function POST(request: Request) {
   const body = await request.json();
   const { userId, name, role, sport, playerProfile, mentorProfile } = body;
 
-  if (!userId || !str(name) || (role !== "player" && role !== "mentor")) {
+  if (!userId || !str(name) || (role !== "player" && role !== "mentor" && role !== "coach")) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
@@ -80,7 +80,7 @@ export async function POST(request: Request) {
       parent_email: str(p.parent_email),
       parent_phone: str(p.parent_phone),
     });
-  } else {
+  } else if (role === "mentor") {
     const m = mentorProfile ?? {};
     await supabase.from("mentor_profiles").insert({
       id: userId,
@@ -111,10 +111,10 @@ export async function POST(request: Request) {
       .send({
         from: EMAIL_FROM,
         to: TEAM_INBOX,
-        subject: `New ${role === "player" ? "athlete" : "mentor"}: ${str(name)}`,
-        html: `<p><strong>${esc(str(name)!)}</strong> (${authUser.user.email ?? "no email"}) just signed up as ${role === "player" ? "an athlete" : "a mentor"}.</p>
+        subject: `New ${role === "player" ? "athlete" : role}: ${str(name)}`,
+        html: `<p><strong>${esc(str(name)!)}</strong> (${authUser.user.email ?? "no email"}) just signed up as ${role === "player" ? "an athlete" : `a ${role}`}.</p>
 ${details ? `<p>${esc(details)}</p>` : ""}
-<p><a href="${BASE_URL}/admin">${role === "player" ? "Match them" : "Review them"} in the admin dashboard →</a></p>`,
+<p><a href="${BASE_URL}/admin">${role === "player" ? "Match them" : role === "coach" ? "See them" : "Review them"} in the admin dashboard →</a></p>`,
       })
       .catch((err) => console.error("signup alert failed:", err));
   }

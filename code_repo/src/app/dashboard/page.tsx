@@ -27,7 +27,9 @@ export default async function DashboardPage() {
 
   const role = profile.role ?? user.user_metadata?.role;
 
-  if (role === "mentor") {
+  if (role === "coach") {
+    redirect("/dashboard/coach");
+  } else if (role === "mentor") {
     redirect("/dashboard/mentor");
   } else if (role === "player") {
     redirect("/dashboard/player");

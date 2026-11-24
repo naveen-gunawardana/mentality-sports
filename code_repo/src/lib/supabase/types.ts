@@ -14,6 +14,18 @@ export type Database = {
   }
   public: {
     Tables: {
+      teams: {
+        Row: { id: string; name: string; sport: string | null; code: string; coach_id: string; created_at: string }
+        Insert: { id?: string; name: string; sport?: string | null; code: string; coach_id: string; created_at?: string }
+        Update: { id?: string; name?: string; sport?: string | null; code?: string; coach_id?: string; created_at?: string }
+        Relationships: []
+      }
+      team_members: {
+        Row: { team_id: string; player_id: string; joined_at: string }
+        Insert: { team_id: string; player_id: string; joined_at?: string }
+        Update: { team_id?: string; player_id?: string; joined_at?: string }
+        Relationships: []
+      }
       messages: {
         Row: {
           content: string
@@ -939,7 +951,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_team: {
+        Args: { p_name: string; p_sport: string | null }
+        Returns: { id: string; name: string; sport: string | null; code: string; coach_id: string; created_at: string }
+      }
+      join_team: {
+        Args: { p_code: string }
+        Returns: { team_id: string; team_name: string }[]
+      }
+      team_rep_summary: {
+        Args: { p_team: string }
+        Returns: { week: string; reps: number; athletes: number; avg_confidence: number | null }[]
+      }
+      is_team_member: { Args: { t: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never

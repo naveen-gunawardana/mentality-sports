@@ -44,6 +44,22 @@ export default function RepsPage() {
         ))}
       </div>
 
+      <Link
+        href="/signup?role=coach"
+        className="group mt-10 flex flex-wrap items-center justify-between gap-4 rounded-lg bg-navy p-6 text-white"
+      >
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-orange-400">For coaches</p>
+          <p className="mt-1 text-lg font-bold">Put your whole roster on it.</p>
+          <p className="text-sm text-white/60">
+            Share one team code. Your athletes do reps before games, and you see team confidence trends. Never their private answers.
+          </p>
+        </div>
+        <span className="inline-flex items-center gap-1 font-semibold group-hover:text-orange-300">
+          Create a team <ArrowRight className="h-4 w-4" />
+        </span>
+      </Link>
+
       <div className="mt-12 rounded-lg bg-offWhite p-6 text-sm text-muted-foreground">
         <p className="mb-1 font-semibold text-navy">Why reps?</p>
         <p>

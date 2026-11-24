@@ -460,11 +460,11 @@ export default function Home() {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                href="/signup?role=mentor"
+                href="/signup?role=coach"
                 className="group inline-flex items-center gap-3 bg-white/[0.06] hover:bg-white/[0.12] px-7 py-4 border border-white/20 font-bold text-white text-sm transition-all duration-200"
                 style={{ clipPath: "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))" }}
               >
-                Give Back as a Mentor
+                For Coaches: Add Your Team
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Link>
             </motion.div>

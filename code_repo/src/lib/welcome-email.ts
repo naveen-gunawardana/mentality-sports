@@ -18,9 +18,12 @@ export async function sendWelcomeEmail({ email, name, role }: { email: string; n
     html: `<p>Hi ${firstName},</p>
 <p>Welcome to Mentality Sports — your account is all set.</p>
 ${role === "mentor"
-  ? `<p>Our team is reviewing your mentor profile. We'll reach out when we have an athlete for you.</p>`
-  : `<p>You're on the list — our team will match you with a mentor soon. We'll reach out by email when you're matched.</p>`}
-<p>In the meantime, check out the <a href="${BASE_URL}/advice">resource library</a>.</p>
+  ? `<p>Our team is reviewing your mentor profile. We'll reach out when we have an athlete for you.</p>
+<p>In the meantime, check out the <a href="${BASE_URL}/advice">resource library</a>.</p>`
+  : role === "coach"
+  ? `<p>Create your team from your <a href="${BASE_URL}/dashboard">dashboard</a> and share the join code with your roster. Ask them to do a <a href="${BASE_URL}/reps/pregame">2-minute Pre-Game Reset</a> before your next game.</p>`
+  : `<p>Your first <a href="${BASE_URL}/reps/pregame">mental rep</a> takes two minutes. Do one before your next game and a debrief after, and your Locker Room starts tracking your confidence.</p>
+<p>Want a mentor too? Ask for one from your <a href="${BASE_URL}/dashboard">Locker Room</a>. Mentors are volunteers, so matching can take a few weeks.</p>`}
 <p>— The Mentality Sports Team</p>`,
   });
 }

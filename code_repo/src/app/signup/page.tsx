@@ -24,8 +24,9 @@ function SignupForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
   // Mentorship CTAs link here with ?role=mentor to pre-select intent.
-  const [role, setRole] = useState<"player" | "mentor">(
-    searchParams.get("role") === "mentor" ? "mentor" : "player",
+  const roleParam = searchParams.get("role");
+  const [role, setRole] = useState<"player" | "mentor" | "coach">(
+    roleParam === "mentor" || roleParam === "coach" ? roleParam : "player",
   );
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -128,15 +129,18 @@ function SignupForm() {
         <p className="text-sm text-muted-foreground">
           {searchParams.get("from") === "rep"
             ? <>Your rep is saved on this device. Make an account to keep it and track your confidence.</>
+            : searchParams.get("from") === "team"
+            ? <>Make your account and you&apos;ll be added to your team automatically.</>
             : <>One quick form and you&apos;re in. Free, always.</>}
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-2 gap-2" role="radiogroup" aria-label="I want to">
+        <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label="I am">
           {([
-            ["player", "Get a mentor"],
-            ["mentor", "Be a mentor"],
+            ["player", "Athlete"],
+            ["coach", "Coach"],
+            ["mentor", "Mentor"],
           ] as const).map(([value, label]) => (
             <button
               key={value}
@@ -248,6 +252,8 @@ function SignupForm() {
         <p className="text-xs text-muted-foreground leading-relaxed">
           {role === "player"
             ? <>Confirm your email and you&apos;re in. Your Locker Room has <strong className="text-navy/80">mental reps ready right away</strong>, and you can ask for a mentor who plays your sport from there.</>
+            : role === "coach"
+            ? <>Confirm your email, create your team, and share the join code. Your athletes do 2-minute mental reps and you see <strong className="text-navy/80">team-level confidence trends</strong>, never anyone&apos;s private answers.</>
             : <>Confirm your email and you&apos;re in. We&apos;ll <strong className="text-navy/80">review your profile</strong> and reach out when we have an athlete for you.</>}
         </p>
       </div>
