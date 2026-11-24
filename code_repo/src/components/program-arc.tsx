@@ -22,7 +22,7 @@ export function ProgramArc({
     <div className={`rounded-lg border border-offWhite-300 bg-white px-4 py-3 ${className}`}>
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 min-w-0">
-          <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-orange-500 shrink-0">1-month program</span>
+          <span className="text-xs font-bold text-orange-500 shrink-0">1-month program</span>
           <span className="text-sm font-semibold text-navy truncate">
             {isComplete ? "All 4 sessions complete" : `Session ${current} of ${total}`}
           </span>

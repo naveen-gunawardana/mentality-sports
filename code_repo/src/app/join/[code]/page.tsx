@@ -51,7 +51,7 @@ export default function JoinTeamPage({ params }: { params: { code: string } }) {
       )}
       {state.kind === "guest" && (
         <>
-          <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.3em] text-orange-500">Team code {code}</p>
+          <p className="mb-2 text-xs font-bold text-orange-500">Team code {code}</p>
           <h1 className="mb-3 text-2xl font-bold text-navy">Your coach added you to Mentality Sports.</h1>
           <p className="mb-8 text-muted-foreground">
             Free 2-minute Game Day routines before and after games. Your answers stay private. Your coach only sees

@@ -74,7 +74,7 @@ export function ReflectionsPanel({ playerId, mentorFirstName }: Props) {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <span className="h-px w-4 bg-orange-400" />
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-navy/45">Reflections</p>
+          <p className="text-xs font-bold text-navy/45">Reflections</p>
         </div>
         <Button size="sm" variant="outline" className="h-7 text-[11px] -mt-1.5" onClick={() => setMode({ kind: "edit", reflection: null })}>
           <Plus className="h-3 w-3 mr-1" /> New
@@ -214,7 +214,7 @@ function Editor({
 
       {/* Mood chips */}
       <div className="mb-3">
-        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45 mb-1.5">Feeling</p>
+        <p className="text-xs font-bold text-navy/45 mb-1.5">Feeling</p>
         <div className="flex flex-wrap gap-1.5">
           {MOODS.map(m => {
             const active = mood === m.key;
@@ -268,7 +268,7 @@ function Editor({
         ) : (
           <div className="rounded-xl bg-orange-50/60 ring-1 ring-orange-200 p-3 space-y-1.5">
             <div className="flex items-center justify-between">
-              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/55">Try one</p>
+              <p className="text-xs font-bold text-navy/55">Try one</p>
               <button type="button" onClick={() => setShowPrompts(false)} className="text-[10px] text-navy/40 hover:text-navy">Hide</button>
             </div>
             <ul className="space-y-1">

@@ -67,7 +67,7 @@ export default function GiveAdvicePage() {
       </Link>
 
       <div className="mb-8">
-        <p className="text-xs font-semibold uppercase tracking-widest text-orange-500 mb-3">Share your experience</p>
+        <p className="text-xs font-semibold text-orange-500 mb-3">Share your experience</p>
         <h1 className="text-3xl font-bold text-navy mb-2">Give Advice</h1>
         <p className="text-navy/55 text-sm leading-relaxed">
           Write something that would have helped you. Admin reviews submissions before they go live — usually within a few days.

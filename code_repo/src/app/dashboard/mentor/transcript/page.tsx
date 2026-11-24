@@ -87,12 +87,12 @@ export default function MentorTranscriptPage() {
       {/* Document */}
       <div className="rounded-sm border border-offWhite-300 bg-white p-8 sm:p-10">
         <div className="flex items-center gap-3 border-b border-offWhite-300 pb-5 mb-6">
-          <div className="flex h-11 w-11 items-center justify-center rounded-sm bg-navy text-orange-400">
+          <div className="flex h-11 w-11 items-center justify-center rounded-sm bg-navy text-whistle">
             <Award className="h-6 w-6" />
           </div>
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-500">Mentality Sports</p>
-            <h1 className="font-condensed text-2xl font-black uppercase tracking-tight text-navy leading-none">Mentorship Transcript</h1>
+            <p className="text-xs font-bold text-orange-500">Mentality Sports</p>
+            <h1 className="font-condensed text-2xl font-black tracking-tight text-navy leading-none">Mentorship Transcript</h1>
           </div>
         </div>
 
@@ -108,7 +108,7 @@ export default function MentorTranscriptPage() {
         ) : (
           <div className="overflow-hidden rounded-sm border border-offWhite-300">
             <table className="w-full text-left text-sm">
-              <thead className="bg-offWhite text-[10px] font-bold uppercase tracking-wider text-navy/45">
+              <thead className="bg-offWhite text-xs font-bold text-navy/45">
                 <tr>
                   <th className="px-4 py-2.5">Athlete</th>
                   <th className="px-4 py-2.5">Started</th>
@@ -146,7 +146,7 @@ export default function MentorTranscriptPage() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/40">{label}</p>
+      <p className="text-xs font-bold text-navy/40">{label}</p>
       <p className="text-base font-bold text-navy mt-0.5 truncate">{value}</p>
     </div>
   );

@@ -236,7 +236,7 @@ function ApplyForm() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="mb-8 text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-orange-500 mb-2">Application</p>
+        <p className="text-xs font-semibold text-orange-500 mb-2">Application</p>
         <h1 className="text-3xl font-bold text-navy mb-2">Apply to the mentorship program</h1>
         <p className="text-muted-foreground">
           {accountName ? `You're signed in as ${accountName}. ` : ""}Tell us about yourself so we can {role === "player" ? "match you with the right mentor" : "review your application"}.

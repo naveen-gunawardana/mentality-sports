@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
 import { REPS } from "@/lib/reps";
 
 export const metadata: Metadata = {
@@ -10,69 +9,65 @@ export const metadata: Metadata = {
   alternates: { canonical: "/game-day" },
 };
 
-export default function RepsPage() {
+export default function GameDayPage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-      <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.3em] text-orange-500">Game Day</p>
-      <h1 className="mb-4 font-condensed text-5xl font-black italic leading-[0.95] text-navy sm:text-6xl">
-        TRAIN YOUR HEAD LIKE YOU TRAIN YOUR BODY.
-      </h1>
-      <p className="mb-10 max-w-xl text-base text-muted-foreground">
-        Short guided exercises built from what athletes told us actually gets in their way: playing scared, getting
-        stuck on mistakes, and carrying a bad game into the next one. Pick one and go. No account needed to try.
-      </p>
-
-      <div className="grid gap-4 sm:grid-cols-3">
-        {REPS.map((rep) => (
-          <Link
-            key={rep.key}
-            href={`/game-day/${rep.key}`}
-            className="group flex flex-col rounded-lg border border-offWhite-300 bg-white p-6 transition-colors hover:border-orange-400"
-          >
-            <p className="mb-1 text-xs font-semibold text-orange-500">{rep.when}</p>
-            <h2 className="mb-2 text-xl font-bold text-navy">{rep.title}</h2>
-            <p className="mb-6 flex-1 text-sm text-muted-foreground">{rep.blurb}</p>
-            <div className="flex items-center justify-between text-sm">
-              <span className="inline-flex items-center gap-1.5 text-navy/50">
-                <Clock className="h-3.5 w-3.5" /> {rep.minutes} min
-              </span>
-              <span className="inline-flex items-center gap-1 font-semibold text-navy group-hover:text-orange-600">
-                Start <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
-
-      <Link
-        href="/signup?role=coach"
-        className="group mt-10 flex flex-wrap items-center justify-between gap-4 rounded-lg bg-navy p-6 text-white"
-      >
-        <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-orange-400">For coaches</p>
-          <p className="mt-1 text-lg font-bold">Put your whole roster on it.</p>
-          <p className="text-sm text-white/60">
-            Share one team code. Your athletes do Game Day routines before games, and you see team confidence trends. Never their private answers.
+    <>
+      <section className="bg-turf text-chalk">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-24">
+          <h1 className="type-display max-w-4xl text-[clamp(2.75rem,7vw,5.5rem)]">Game Day</h1>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-chalk/85">
+            Short routines for the moments that decide how you play: before you compete, after, and after the rough
+            nights. Pick one and go. No account needed to try.
           </p>
         </div>
-        <span className="inline-flex items-center gap-1 font-semibold group-hover:text-orange-300">
-          Create a team <ArrowRight className="h-4 w-4" />
-        </span>
-      </Link>
+      </section>
 
-      <div className="mt-12 rounded-lg bg-offWhite p-6 text-sm text-muted-foreground">
-        <p className="mb-1 font-semibold text-navy">Why a routine?</p>
-        <p>
-          Confidence isn&apos;t something you have or don&apos;t. It&apos;s something you build, one game at a time. Do a
-          pre-game reset before you compete and a debrief after, and in a few weeks you&apos;ll see your own confidence
-          trend instead of guessing at it. Want a real person in your corner too? Members can request a mentor who
-          played your sport.
-        </p>
-        <p className="mt-3 text-xs">
-          Game Day routines are not therapy. If you&apos;re struggling with something serious or feel unsafe, call or text 988
-          (US) to reach someone right now.
-        </p>
-      </div>
-    </div>
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 md:py-20">
+        <ul>
+          {REPS.map((rep) => (
+            <li key={rep.key} className="border-t border-line last:border-b">
+              <Link href={`/game-day/${rep.key}`} className="group grid items-center gap-4 py-8 md:grid-cols-[1fr_1.5fr_auto] md:gap-10">
+                <div>
+                  <p className="text-sm font-semibold text-turf">{rep.when}</p>
+                  <h2 className="type-heading mt-1 text-3xl text-ink group-hover:text-turf">{rep.title}</h2>
+                </div>
+                <p className="text-base leading-relaxed text-ink/75">{rep.blurb}</p>
+                <span className="justify-self-start rounded-md bg-ink px-5 py-3 text-sm font-semibold text-chalk group-hover:bg-turf md:justify-self-end">
+                  Start, {rep.minutes} min
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="border-y border-line bg-white">
+        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-2 md:py-20">
+          <div>
+            <h2 className="type-heading text-[clamp(1.75rem,3.4vw,2.5rem)] text-ink">Why a routine?</h2>
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-ink/75">
+              Confidence isn&apos;t something you have or don&apos;t. You build it one game at a time. Do a reset before
+              you compete and a debrief after, and in a few weeks your Locker Room shows your confidence trend instead
+              of you guessing at it.
+            </p>
+          </div>
+          <div className="rounded-xl bg-ink p-7 text-chalk">
+            <h2 className="type-heading text-2xl">Coaches: put the whole roster on it.</h2>
+            <p className="mt-3 text-base leading-relaxed text-chalk/75">
+              Share one team code. Your players do Game Day routines, and you see team totals and confidence trends.
+              Never what any one player wrote.
+            </p>
+            <Link href="/signup?role=coach" className="mt-6 inline-block rounded-md bg-whistle px-5 py-3 font-semibold text-ink hover:bg-whistle-300">
+              Create a team
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <p className="mx-auto max-w-6xl px-5 py-12 text-sm text-ink/65 sm:px-8">
+        Game Day routines are not therapy. If you&apos;re struggling with something serious or feel unsafe, call or text{" "}
+        <a href="tel:988" className="font-semibold text-turf underline">988</a> to reach someone right now.
+      </p>
+    </>
   );
 }

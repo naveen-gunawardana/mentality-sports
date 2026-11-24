@@ -61,7 +61,7 @@ export function MentorRequestCard({ playerId, initialChallenges, initialGoal }: 
 
   return (
     <section className="rounded-lg border border-offWhite-300 bg-white p-5 sm:p-6">
-      <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.25em] text-navy/50">
+      <p className="flex items-center gap-2 text-xs font-bold text-navy/50">
         <Users className="h-3.5 w-3.5" /> Optional
       </p>
       <h2 className="mt-1 text-xl font-bold text-navy">Want a mentor too?</h2>

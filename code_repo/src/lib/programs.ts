@@ -41,10 +41,10 @@ export const PROGRAMS: Program[] = [
   {
     key: "mentorship",
     label: "1-on-1 Mentorship",
-    title: "1-on-1 Mentorship",
+    title: "Mentors",
     tagline: "Matched with a mentor who's lived it",
     description:
-      "Get paired 1-on-1 with a current or former athlete who's been through the same mental battles. A focused 1-month program — four weekly sessions — free, the flagship.",
+      "Ask for a current or former athlete in your sport. Four weeks of weekly check-ins and messages in between. Mentors volunteer, so matching can take a few weeks.",
     href: "/mentorship",
     Icon: Users,
     status: "live",
@@ -55,7 +55,7 @@ export const PROGRAMS: Program[] = [
     title: "Resource Library",
     tagline: "Articles on the mental side of sport",
     description:
-      "A growing library on confidence, anxiety, motivation, identity, and every mental challenge athletes face — written by people who've been there.",
+      "Articles on confidence, nerves, motivation, identity and the other parts of the mental game, written by people who've been there.",
     href: "/advice",
     Icon: BookOpen,
     status: "live",
@@ -66,7 +66,7 @@ export const PROGRAMS: Program[] = [
     title: "The Mental Rep",
     tagline: "One idea you can use, twice a month",
     description:
-      "Our newsletter for athletes who train the mental game. No fluff — one practical idea, a couple times a month. Free to join.",
+      "One practical idea for the mental game, a couple of times a month. Free.",
     href: "/newsletter",
     Icon: Mail,
     status: "new",
@@ -77,7 +77,7 @@ export const PROGRAMS: Program[] = [
     title: "The Podcast",
     tagline: "Honest conversations on sport & mind",
     description:
-      "Real talk with athletes, mentors, and experts on the mental side of competing. New episodes every month.",
+      "Conversations with athletes, mentors and experts about the mental side of competing.",
     href: "/podcast",
     Icon: Mic,
     status: "new",

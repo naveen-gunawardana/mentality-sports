@@ -57,7 +57,7 @@ export function NewsletterSignup({
           dark ? "bg-white/10 text-white" : "bg-orange-50 text-navy"
         } ${className}`}
       >
-        <CheckCircle className={`h-5 w-5 shrink-0 ${dark ? "text-orange-400" : "text-orange-500"}`} />
+        <CheckCircle className={`h-5 w-5 shrink-0 ${dark ? "text-whistle" : "text-orange-500"}`} />
         <p className="text-sm font-medium">{message}</p>
       </div>
     );
@@ -94,7 +94,7 @@ export function NewsletterSignup({
         <button
           type="submit"
           disabled={status === "loading"}
-          className="group inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 disabled:opacity-60 px-6 py-3 text-sm font-bold text-white transition-colors shrink-0"
+          className="group inline-flex items-center justify-center gap-2 rounded-md bg-turf hover:bg-turf-600 disabled:opacity-60 px-5 py-3 text-sm font-semibold text-chalk transition-colors shrink-0"
         >
           {status === "loading" ? (
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -107,7 +107,7 @@ export function NewsletterSignup({
         </button>
       </div>
       {status === "error" && (
-        <p className={`text-xs ${dark ? "text-orange-300" : "text-orange-600"}`}>{message}</p>
+        <p className={`text-xs ${dark ? "text-whistle-200" : "text-orange-600"}`}>{message}</p>
       )}
       <p className={`text-[11px] ${dark ? "text-white/35" : "text-navy/40"}`}>
         Free. A couple emails a month. Unsubscribe anytime.

@@ -51,7 +51,7 @@ export function TeamCard({ playerId }: { playerId: string }) {
 
   return (
     <section className="rounded-lg border border-offWhite-300 bg-white p-5">
-      <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.25em] text-navy/50">
+      <p className="flex items-center gap-2 text-xs font-bold text-navy/50">
         <Users className="h-3.5 w-3.5" /> {teams.length ? "Your team" : "On a team?"}
       </p>
       {teams.length > 0 ? (
@@ -81,7 +81,7 @@ export function TeamCard({ playerId }: { playerId: string }) {
           onChange={(e) => setCode(normalizeTeamCode(e.target.value))}
           placeholder={teams.length ? "Join another team" : "Team code"}
           aria-label="Team code"
-          className="w-full rounded-md border border-input bg-background px-3 py-2 font-mono text-sm uppercase tracking-widest placeholder:font-sans placeholder:normal-case placeholder:tracking-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="w-full rounded-md border border-input bg-background px-3 py-2 font-mono text-sm placeholder:font-sans placeholder:normal-case placeholder:tracking-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         />
         <button disabled={joining || code.length !== 6} className="rounded-md bg-navy px-4 text-sm font-semibold text-white disabled:opacity-40">
           {joining ? "…" : "Join"}

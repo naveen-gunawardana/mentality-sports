@@ -133,7 +133,7 @@ export default function HoursReportPage() {
       <div className="rounded-lg border border-offWhite-300 bg-white p-8 shadow-sm print:shadow-none print:border-none print:p-0">
         {/* Header */}
         <div className="border-b border-offWhite-300 pb-6 mb-6">
-          <p className="text-xs font-bold uppercase tracking-widest text-orange-500 mb-1">
+          <p className="text-xs font-bold text-orange-500 mb-1">
             Mentality Sports
           </p>
           <h1 className="text-2xl font-bold text-navy mb-1">
@@ -147,19 +147,19 @@ export default function HoursReportPage() {
         {/* Mentor + period info */}
         <div className="grid grid-cols-2 gap-6 mb-8">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-navy/40 mb-1">Mentor</p>
+            <p className="text-xs font-semibold text-navy/40 mb-1">Mentor</p>
             <p className="text-base font-semibold text-navy">{mentorName}</p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-navy/40 mb-1">Service Period</p>
+            <p className="text-xs font-semibold text-navy/40 mb-1">Service Period</p>
             <p className="text-base font-semibold text-navy">{fmtPeriod()}</p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-navy/40 mb-1">Total Sessions</p>
+            <p className="text-xs font-semibold text-navy/40 mb-1">Total Sessions</p>
             <p className="text-2xl font-bold text-navy">{sessions.length}</p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-navy/40 mb-1">Total Hours</p>
+            <p className="text-xs font-semibold text-navy/40 mb-1">Total Hours</p>
             <p className="text-2xl font-bold text-orange-500">{totalHours} hrs</p>
           </div>
         </div>
@@ -167,7 +167,7 @@ export default function HoursReportPage() {
         {/* Session table */}
         {sessions.length > 0 ? (
           <div className="mb-8">
-            <p className="text-xs font-semibold uppercase tracking-widest text-navy/40 mb-3">Session Log</p>
+            <p className="text-xs font-semibold text-navy/40 mb-3">Session Log</p>
             <table className="w-full text-sm border-collapse">
               <thead>
                 <tr className="border-b border-offWhite-300">
@@ -206,7 +206,7 @@ export default function HoursReportPage() {
 
         {/* Certification */}
         <div className="rounded-sm bg-offWhite border border-offWhite-300 p-5 mb-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-navy/40 mb-2">Certification</p>
+          <p className="text-xs font-semibold text-navy/40 mb-2">Certification</p>
           <p className="text-sm text-navy/80 leading-relaxed">
             This report certifies that <strong className="text-navy">{mentorName}</strong> participated in
             the Mentality Sports community basketball mentorship program during the period above.
