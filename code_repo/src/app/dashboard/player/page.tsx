@@ -193,7 +193,7 @@ export default function PlayerDashboard() {
             {userId && (
               <CertificateRequest userId={userId} role="mentee" matchId={completedMatch.id} programInfo={`Mentored by ${completedMatch.mentor.name}`} className="mb-4" />
             )}
-            <p className="text-xs font-semibold text-navy/40 mb-2">Your conversation</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-navy/40 mb-2">Your conversation</p>
             {userId && (
               <div className="mb-8">
                 <ChatWindow
@@ -222,7 +222,7 @@ export default function PlayerDashboard() {
           </div>
         )}
         <div>
-          <p className="text-xs font-semibold text-navy/40 mb-4">Reading for between games</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-navy/40 mb-4">Reading for between games</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
             {recommendedArticles.map((res) => (
               <Link key={res.slug} href={`/advice/${res.slug}`}
@@ -287,14 +287,14 @@ export default function PlayerDashboard() {
             <AvatarUpload userId={userId} name={profile?.name ?? ""} avatarUrl={profile?.avatar_url ?? null} />
           )}
           <div>
-            <p className="text-xs font-bold text-orange-500">Locker room</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-orange-500">Locker room</p>
             <h1 className="text-xl font-bold text-navy tracking-tight leading-tight mt-0.5">Welcome back, {profile?.name?.split(" ")[0]}</h1>
           </div>
         </div>
         <div className="flex items-center gap-2">
         <Link
           href="/game-day"
-          className="inline-flex items-center gap-1.5 rounded-full ring-1 ring-navy/15 bg-white hover:bg-offWhite text-navy px-3 h-9 text-[12px] font-bold transition-all"
+          className="inline-flex items-center gap-1.5 rounded-full ring-1 ring-navy/15 bg-white hover:bg-offWhite text-navy px-3 h-9 text-[12px] font-bold uppercase tracking-[0.1em] transition-all"
         >
           <Flame className="h-3.5 w-3.5 text-orange-500" />
           Game Day
@@ -303,7 +303,7 @@ export default function PlayerDashboard() {
           type="button"
           onClick={() => setShowScheduleModal(true)}
           aria-label="Schedule a call"
-          className="md:hidden inline-flex items-center gap-1.5 rounded-full ring-1 ring-orange-300 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 h-9 text-[12px] font-bold transition-all"
+          className="md:hidden inline-flex items-center gap-1.5 rounded-full ring-1 ring-orange-300 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 h-9 text-[12px] font-bold uppercase tracking-[0.1em] transition-all"
         >
           <CalendarClock className="h-3.5 w-3.5" />
           Call

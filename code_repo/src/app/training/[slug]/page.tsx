@@ -221,7 +221,7 @@ export default function CourseDetailPage() {
         {userId && lessons.length > 0 && (
           <div className="mt-8 max-w-md">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-navy/40">Your progress</span>
+              <span className="text-[11px] font-semibold uppercase tracking-widest text-navy/40">Your progress</span>
               <span className="text-xs font-bold text-navy">
                 {completedCount}/{lessons.length} · {pct}%
               </span>
@@ -248,7 +248,7 @@ export default function CourseDetailPage() {
           <aside className="lg:sticky lg:top-6 lg:self-start">
             <div className="flex items-center gap-2 mb-3">
               <Dumbbell className="h-4 w-4 text-orange-500" />
-              <h2 className="text-sm font-black text-navy font-condensed">Lessons</h2>
+              <h2 className="text-sm font-black text-navy font-condensed tracking-widest uppercase">Lessons</h2>
             </div>
             <ol className="space-y-1.5">
               {lessons.map((l, idx) => {
@@ -269,7 +269,7 @@ export default function CourseDetailPage() {
                         {isDone ? (
                           <CircleCheck className="h-4 w-4 text-orange-500" />
                         ) : (
-                          <Circle className={`h-4 w-4 ${isActive ? "text-whistle" : "text-navy/25"}`} />
+                          <Circle className={`h-4 w-4 ${isActive ? "text-orange-400" : "text-navy/25"}`} />
                         )}
                       </span>
                       <span className="min-w-0 flex-1">
@@ -308,10 +308,10 @@ export default function CourseDetailPage() {
                     />
                   </div>
                 ) : (
-                  <div className="aspect-video w-full flex items-center justify-center rounded-sm border border-offWhite-300 bg-[#12263A]">
+                  <div className="aspect-video w-full flex items-center justify-center rounded-sm border border-offWhite-300 bg-[#0c1628]">
                     <div className="text-center">
-                      <PlayCircle className="h-10 w-10 text-whistle/70 mx-auto mb-2" />
-                      <p className="text-xs text-white/40">Read-along lesson</p>
+                      <PlayCircle className="h-10 w-10 text-orange-400/70 mx-auto mb-2" />
+                      <p className="text-xs text-white/40 uppercase tracking-widest">Read-along lesson</p>
                     </div>
                   </div>
                 )}

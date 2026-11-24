@@ -188,7 +188,7 @@ export function LogSessionForm({ matchId, userId, otherPersonName, onSuccess, on
       <div className="mb-8">
         <div className="flex items-center gap-2 text-orange-500 mb-3">
           <BookOpen className="h-5 w-5" />
-          <span className="text-xs font-bold">Session logged</span>
+          <span className="text-xs font-bold uppercase tracking-widest">Session logged</span>
         </div>
         <h2 className="text-2xl font-bold text-navy">Add your reflection</h2>
         <p className="text-muted-foreground mt-1 text-sm leading-relaxed">

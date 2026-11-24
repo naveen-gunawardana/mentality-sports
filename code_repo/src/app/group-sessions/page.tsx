@@ -43,9 +43,9 @@ function SessionCard({ s }: { s: SessionItem }) {
       <div className="flex items-start gap-5">
         {/* Date block */}
         <div className="flex flex-col items-center justify-center rounded-sm bg-navy text-white w-16 h-16 shrink-0">
-          <span className="text-xs font-bold text-whistle">{d.month}</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-orange-400">{d.month}</span>
           <span className="text-2xl font-black font-condensed leading-none">{d.day}</span>
-          <span className="text-xs text-white/50">{d.weekday}</span>
+          <span className="text-[9px] uppercase tracking-wider text-white/50">{d.weekday}</span>
         </div>
 
         <div className="flex-1 min-w-0">
@@ -117,19 +117,20 @@ export default function GroupSessionsPage() {
 
   return (
     <div>
-      <div className="rounded-md bg-navy border-b border-white/10 text-center py-2.5 px-4 text-xs text-white/60 tracking-wide">
+      <div className="bg-navy border-b border-white/10 text-center py-2.5 px-4 text-xs text-white/60 tracking-wide">
         Group Sessions are <span className="text-white font-semibold">live and free for members</span> — sign in to RSVP and join.
       </div>
 
       {/* Hero */}
-      <div className="relative bg-[#12263A] overflow-hidden">
+      <div className="relative bg-[#0c1628] overflow-hidden">
+        <div aria-hidden className="absolute top-1/2 right-[-2rem] -translate-y-1/2 font-black text-white/[0.03] leading-none select-none pointer-events-none font-condensed" style={{ fontSize: "clamp(10rem, 24vw, 26rem)" }}>LIVE</div>
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center gap-3 mb-5">
             <span className="block bg-orange-400 w-8 h-px" />
-            <span className="font-bold text-xs text-whistle">Live · Virtual · Members</span>
+            <span className="font-bold text-[10px] text-orange-400 uppercase tracking-[0.3em]">Live · Virtual · Members</span>
           </div>
           <h1 className="font-black text-white font-condensed tracking-tight leading-none mb-5" style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)" }}>
-            Group sessions
+            GROUP SESSIONS
           </h1>
           <p className="max-w-xl text-white/55 text-[15px] leading-relaxed">
             Live virtual workshops on the mental side of sport — confidence, pressure, identity, coming back from injury. Hosted by athletes who&apos;ve been there. Drop in, listen, ask questions. Free for members.
@@ -146,12 +147,12 @@ export default function GroupSessionsPage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-500/10 mx-auto mb-5">
               <Lock className="h-5 w-5 text-orange-500" />
             </div>
-            <h2 className="text-2xl font-black text-navy font-condensed tracking-wide mb-2">Members only</h2>
+            <h2 className="text-2xl font-black text-navy font-condensed tracking-wide mb-2">MEMBERS ONLY</h2>
             <p className="text-navy/55 text-sm mb-7 max-w-md mx-auto">
               Group Sessions are free, but you&apos;ll need an account to see the schedule and RSVP. Creating one takes under a minute.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/signup" className="rounded-md inline-flex items-center justify-center gap-2 bg-navy px-6 py-3 text-sm font-bold text-white hover:bg-orange-500 transition-colors">
+              <Link href="/signup" className="inline-flex items-center justify-center gap-2 bg-navy px-6 py-3 text-sm font-bold text-white hover:bg-orange-500 transition-colors">
                 Create an account <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/signin?redirect=/group-sessions" className="inline-flex items-center justify-center gap-2 border border-navy/15 px-6 py-3 text-sm font-bold text-navy hover:border-navy/30 transition-colors">
@@ -165,7 +166,7 @@ export default function GroupSessionsPage() {
           <>
             <div className="flex items-center gap-3 mb-8">
               <Video className="h-5 w-5 text-orange-500" />
-              <h2 className="text-2xl font-black text-navy font-condensed tracking-wide">Upcoming</h2>
+              <h2 className="text-2xl font-black text-navy font-condensed tracking-wide">UPCOMING</h2>
             </div>
 
             {upcoming.length === 0 ? (
@@ -186,13 +187,13 @@ export default function GroupSessionsPage() {
             {past.length > 0 && (
               <>
                 <div className="flex items-center gap-3 mt-16 mb-6">
-                  <h2 className="text-lg font-bold text-navy/40">Past sessions</h2>
+                  <h2 className="text-lg font-bold text-navy/40 uppercase tracking-widest">Past sessions</h2>
                   <div className="flex-1 h-px bg-offWhite-300" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {past.map((s) => (
                     <Link key={s.id} href={`/group-sessions/${s.slug}`} className="group flex flex-col rounded-sm border border-offWhite-300 bg-white p-5 opacity-75 hover:opacity-100 transition-opacity">
-                      {s.topic && <span className="text-xs font-medium text-navy/40 mb-1.5">{s.topic}</span>}
+                      {s.topic && <span className="text-[10px] font-medium text-navy/40 uppercase tracking-wider mb-1.5">{s.topic}</span>}
                       <h3 className="text-sm font-bold text-navy leading-snug group-hover:text-orange-600 transition-colors">{s.title}</h3>
                       <span className="text-[11px] text-navy/40 mt-2">{new Date(s.starts_at).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
                     </Link>

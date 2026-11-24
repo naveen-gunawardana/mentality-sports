@@ -55,7 +55,7 @@ export function StarterChips({ userId, role, challenges, rotateKey, onPick }: Pr
   return (
     <div className="px-5 pt-3 pb-2 shrink-0 bg-gradient-to-b from-transparent to-white">
       <div className="flex items-center justify-between mb-2">
-        <p className="text-xs font-bold text-navy/45 flex items-center gap-1.5">
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45 flex items-center gap-1.5">
           <Lightbulb className="h-3 w-3 text-orange-500" />
           Start with…
         </p>

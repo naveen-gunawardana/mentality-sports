@@ -61,7 +61,7 @@ function SectionLabel({ children, accent }: { children: React.ReactNode; accent?
   return (
     <div className="flex items-center gap-2 mb-2">
       {accent && <span className="h-px w-4 bg-orange-400" />}
-      <p className="text-xs font-bold text-navy/45">{children}</p>
+      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-navy/45">{children}</p>
     </div>
   );
 }
@@ -151,7 +151,7 @@ export function DashboardRightPanel(props: Props) {
               </div>
             )}
             <div className="min-w-0 text-left">
-              <p className="text-xs font-bold text-orange-500">
+              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-orange-500">
                 {isMentor ? "Your athlete" : "Your mentor"}
               </p>
               <p className="text-[14px] font-semibold text-navy truncate leading-tight mt-0.5">{personName}</p>
@@ -168,7 +168,7 @@ export function DashboardRightPanel(props: Props) {
                 {props.mentee.school && <Field label="School" value={props.mentee.school} />}
                 {props.mentee.challenges && props.mentee.challenges.length > 0 && (
                   <div>
-                    <p className="text-xs font-bold text-navy/40 mb-1.5">Working through</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/40 mb-1.5">Working through</p>
                     <div className="flex flex-wrap gap-1.5">
                       {props.mentee.challenges.map(c => (
                         <span key={c} className="rounded-full bg-offWhite/70 ring-1 ring-offWhite-300 px-2.5 py-0.5 text-[11px] text-navy/75 font-medium">{c}</span>
@@ -187,7 +187,7 @@ export function DashboardRightPanel(props: Props) {
                 {props.mentor.why && <Field label="Why they mentor" value={props.mentor.why} />}
                 {props.mentor.skills && props.mentor.skills.length > 0 && (
                   <div>
-                    <p className="text-xs font-bold text-navy/40 mb-1.5">Skills</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/40 mb-1.5">Skills</p>
                     <div className="flex flex-wrap gap-1.5">
                       {props.mentor.skills.map(s => (
                         <span key={s} className="rounded-full bg-offWhite/70 ring-1 ring-offWhite-300 px-2.5 py-0.5 text-[11px] text-navy/75 font-medium">{s}</span>
@@ -312,7 +312,7 @@ function MentorPlaybook() {
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-xs font-bold text-navy/40 mb-1">{label}</p>
+      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/40 mb-1">{label}</p>
       <p className="text-[13px] text-navy/85 leading-snug">{value}</p>
     </div>
   );

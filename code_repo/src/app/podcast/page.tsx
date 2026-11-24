@@ -81,7 +81,7 @@ function EpisodeCard({ ep }: { ep: Episode }) {
       <div className="p-6 flex flex-col flex-1">
         <div className="flex items-start gap-5">
           <div className="flex flex-col items-center justify-center rounded-sm bg-navy text-white w-16 h-16 shrink-0">
-            <Mic className="h-4 w-4 text-whistle mb-0.5" />
+            <Mic className="h-4 w-4 text-orange-400 mb-0.5" />
             {ep.episode_number != null ? (
               <span className="text-xl font-black font-condensed leading-none">
                 {String(ep.episode_number).padStart(2, "0")}
@@ -139,7 +139,7 @@ function EpisodeCard({ ep }: { ep: Episode }) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-sm bg-navy hover:bg-navy/90 px-3.5 py-2 text-xs font-semibold text-white transition-colors"
               >
-                <Play className="h-3.5 w-3.5 text-whistle" /> Spotify
+                <Play className="h-3.5 w-3.5 text-orange-400" /> Spotify
               </a>
             )}
             {ep.apple_url && (
@@ -202,7 +202,7 @@ export default function PodcastPage() {
   return (
     <div>
       {hasEpisodes && (
-        <div className="rounded-md bg-navy border-b border-white/10 text-center py-2.5 px-4 text-xs text-white/60 tracking-wide">
+        <div className="bg-navy border-b border-white/10 text-center py-2.5 px-4 text-xs text-white/60 tracking-wide">
           {latestEpisode?.episode_number != null ? (
             <>
               Episode {latestEpisode.episode_number} is{" "}
@@ -218,11 +218,18 @@ export default function PodcastPage() {
       )}
 
       {/* Hero */}
-      <div className="relative bg-[#12263A] overflow-hidden">
+      <div className="relative bg-[#0c1628] overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute top-1/2 right-[-2rem] -translate-y-1/2 font-black text-white/[0.03] leading-none select-none pointer-events-none font-condensed"
+          style={{ fontSize: "clamp(7rem, 18vw, 20rem)" }}
+        >
+          PODCAST
+        </div>
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center gap-3 mb-5">
-            <Mic className="h-5 w-5 text-whistle" />
-            <span className="font-bold text-xs text-whistle">
+            <Mic className="h-5 w-5 text-orange-400" />
+            <span className="font-bold text-[10px] text-orange-400 uppercase tracking-[0.3em]">
               {hasEpisodes ? "Now streaming" : "Coming soon"}
             </span>
           </div>
@@ -230,7 +237,7 @@ export default function PodcastPage() {
             className="font-black text-white font-condensed tracking-tight leading-none mb-5"
             style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)" }}
           >
-            The Podcast
+            THE PODCAST
           </h1>
           <p className="max-w-xl text-white/55 text-[15px] leading-relaxed">
             Honest conversations with athletes, mentors, and experts on the
@@ -258,7 +265,7 @@ export default function PodcastPage() {
             <div className="flex items-center gap-3 mb-8">
               <Headphones className="h-5 w-5 text-orange-500" />
               <h2 className="text-2xl font-black text-navy font-condensed tracking-wide">
-                Episodes
+                EPISODES
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -267,12 +274,12 @@ export default function PodcastPage() {
               ))}
             </div>
 
-            <div className="mt-16 rounded-sm bg-[#12263A] p-8 sm:p-10">
-              <p className="font-bold text-xs text-whistle mb-3">
+            <div className="mt-16 rounded-sm bg-[#0c1628] p-8 sm:p-10">
+              <p className="font-bold text-[10px] text-orange-400 uppercase tracking-[0.3em] mb-3">
                 Never miss a drop
               </p>
               <h3 className="text-2xl font-black text-white font-condensed tracking-wide mb-2">
-                Get new episodes in your inbox
+                GET NEW EPISODES IN YOUR INBOX
               </h3>
               <p className="text-white/55 text-sm leading-relaxed mb-6 max-w-lg">
                 We&apos;ll let you know the moment a new conversation goes live.
@@ -288,9 +295,9 @@ export default function PodcastPage() {
             {/* Apply to be a guest */}
             <div className="mt-8 rounded-sm border border-offWhite-300 bg-offWhite p-8 sm:p-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
               <div>
-                <p className="font-bold text-xs text-orange-500 mb-2">Share your story</p>
+                <p className="font-bold text-[10px] text-orange-500 uppercase tracking-[0.3em] mb-2">Share your story</p>
                 <h3 className="text-xl font-black text-navy font-condensed tracking-wide mb-1">
-                  Want to be a guest?
+                  INTERESTED IN BEING A GUEST?
                 </h3>
                 <p className="text-sm text-navy/55 leading-relaxed max-w-md">
                   We&apos;re looking for athletes, coaches, and mental performance experts with a story worth telling.
@@ -300,7 +307,7 @@ export default function PodcastPage() {
                 href="/podcast/apply"
                 className="shrink-0 inline-flex items-center gap-2 rounded-sm bg-navy hover:bg-navy/90 px-6 py-3 text-sm font-semibold text-white transition-colors"
               >
-                <Mic className="h-4 w-4 text-whistle" />
+                <Mic className="h-4 w-4 text-orange-400" />
                 Submit a Guest Application
               </a>
             </div>
@@ -309,7 +316,7 @@ export default function PodcastPage() {
           /* Empty state — the expected case, made the hero of the page */
           <div className="mx-auto max-w-3xl">
             <div className="rounded-sm border border-offWhite-300 bg-offWhite overflow-hidden">
-              <div className="bg-[#12263A] px-8 py-10 sm:px-10 text-center relative overflow-hidden">
+              <div className="bg-[#0c1628] px-8 py-10 sm:px-10 text-center relative overflow-hidden">
                 <div
                   aria-hidden
                   className="absolute inset-0 flex items-center justify-center font-black text-white/[0.04] leading-none select-none pointer-events-none font-condensed"
@@ -321,11 +328,11 @@ export default function PodcastPage() {
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-sm bg-orange-500 mb-5">
                     <Mic className="h-7 w-7 text-white" />
                   </div>
-                  <p className="font-bold text-xs text-whistle mb-3">
+                  <p className="font-bold text-[10px] text-orange-400 uppercase tracking-[0.3em] mb-3">
                     In production
                   </p>
                   <h2 className="text-3xl sm:text-4xl font-black text-white font-condensed tracking-tight leading-none mb-4">
-                    Episode 1 is on the way
+                    EPISODE 01 IS ON THE WAY
                   </h2>
                   <p className="text-white/60 text-sm leading-relaxed max-w-md mx-auto">
                     We&apos;re recording our first season right now — raw,
@@ -336,7 +343,7 @@ export default function PodcastPage() {
               </div>
 
               <div className="px-8 py-10 sm:px-10">
-                <p className="text-xs font-semibold text-navy/35 mb-4">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-navy/35 mb-4">
                   What we&apos;re getting into
                 </p>
                 <div className="flex flex-wrap gap-2 mb-10">
@@ -350,7 +357,7 @@ export default function PodcastPage() {
                   ))}
                 </div>
 
-                <p className="text-xs font-semibold text-navy/35 mb-4">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-navy/35 mb-4">
                   Listen on
                 </p>
                 <div className="flex flex-wrap items-center gap-2.5 mb-10">
@@ -379,9 +386,9 @@ export default function PodcastPage() {
 
                 <div className="rounded-sm bg-navy p-6 sm:p-7">
                   <div className="flex items-center gap-2 mb-1.5">
-                    <ArrowRight className="h-4 w-4 text-whistle" />
+                    <ArrowRight className="h-4 w-4 text-orange-400" />
                     <p className="font-bold text-white text-lg font-condensed tracking-wide">
-                      Get notified when we go live
+                      GET NOTIFIED WHEN WE GO LIVE
                     </p>
                   </div>
                   <p className="text-xs text-white/55 leading-relaxed mb-5">

@@ -19,8 +19,8 @@ export function ConfidenceTrend({ scores }: { scores: number[] }) {
     <div>
       <svg viewBox={`0 0 ${w} ${h}`} className="h-14 w-full" role="img" aria-label={`Confidence trend over your last ${scores.length} routines, most recent ${last} out of 10`}>
         <line x1={pad} x2={w - pad} y1={y(5.5)} y2={y(5.5)} stroke="currentColor" className="text-offWhite-300" strokeDasharray="3 3" />
-        <path d={d} fill="none" stroke="#0B6E4F" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx={x(scores.length - 1)} cy={y(last)} r={4} fill="#0B6E4F" />
+        <path d={d} fill="none" stroke="#C4633A" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx={x(scores.length - 1)} cy={y(last)} r={4} fill="#C4633A" />
       </svg>
       <p className="mt-1 text-xs text-muted-foreground">
         Last {last}/10 ·{" "}

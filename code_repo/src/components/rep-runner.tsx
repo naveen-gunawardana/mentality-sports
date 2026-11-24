@@ -54,7 +54,7 @@ export function RepRunner({ rep, onComplete, onExit }: Props) {
         </span>
       </div>
 
-      <p className="mb-2 text-xs font-bold text-orange-500">{rep.title}</p>
+      <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.25em] text-orange-500">{rep.title}</p>
       <h2 className="mb-2 text-2xl font-bold text-navy leading-tight">{step.prompt}</h2>
       {"help" in step && step.help && <p className="mb-6 text-sm text-muted-foreground">{step.help}</p>}
 

@@ -69,7 +69,7 @@ export function LogHoursForm({ matchId, userId }: Props) {
     <div className="space-y-3">
       {/* Total */}
       <div className="flex items-baseline justify-between rounded-xl bg-navy/5 px-3.5 py-2.5">
-        <p className="text-xs font-bold text-navy/45">Total logged</p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45">Total logged</p>
         <p className="text-[15px] font-bold text-navy tabular-nums">
           {totalHrs}<span className="text-navy/50 text-xs font-medium ml-0.5">h</span>
           {remMin > 0 && <> {remMin}<span className="text-navy/50 text-xs font-medium ml-0.5">m</span></>}
@@ -79,16 +79,16 @@ export function LogHoursForm({ matchId, userId }: Props) {
       <form onSubmit={submit} className="space-y-2.5">
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="text-xs font-bold text-navy/45">Date</label>
+            <label className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45">Date</label>
             <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className={inputClass + " mt-1"} />
           </div>
           <div>
-            <label className="text-xs font-bold text-navy/45">Minutes</label>
+            <label className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45">Minutes</label>
             <input type="number" min={1} value={minutes} onChange={(e) => setMinutes(e.target.value)} placeholder="30" className={inputClass + " mt-1"} />
           </div>
         </div>
         <div>
-          <label className="text-xs font-bold text-navy/45">Notes (optional)</label>
+          <label className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45">Notes (optional)</label>
           <input type="text" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="What did you cover?" className={inputClass + " mt-1"} />
         </div>
         {error && <p className="text-xs text-red-600">{error}</p>}

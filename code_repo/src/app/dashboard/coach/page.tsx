@@ -70,7 +70,7 @@ export default function CoachDashboard() {
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-bold text-orange-500">Coach</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-orange-500">Coach</p>
           <h1 className="text-3xl font-bold text-navy">Hey {name}.</h1>
           <p className="mt-1 max-w-xl text-sm text-muted-foreground">
             Your athletes do 2-minute Game Day routines before and after games. You see team totals and how confident the
@@ -121,8 +121,8 @@ export default function CoachDashboard() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-semibold text-navy/40">Join code</p>
-                  <p className="font-mono text-2xl font-black text-orange-500">{t.code}</p>
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-navy/40">Join code</p>
+                  <p className="font-mono text-2xl font-black tracking-[0.2em] text-orange-500">{t.code}</p>
                 </div>
               </div>
 
@@ -148,7 +148,7 @@ export default function CoachDashboard() {
               {t.weeks.length > 1 && (
                 <table className="mt-6 w-full text-sm">
                   <thead>
-                    <tr className="text-left text-xs text-navy/40">
+                    <tr className="text-left text-xs uppercase tracking-wider text-navy/40">
                       <th className="py-1 font-semibold">Week of</th><th className="font-semibold">Routines</th><th className="font-semibold">Athletes</th><th className="font-semibold">Confidence</th>
                     </tr>
                   </thead>

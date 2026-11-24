@@ -77,7 +77,7 @@ export default function NewsletterIssuePage() {
 
       {/* Subscribe CTA */}
       <div className="mt-14 rounded-sm border border-offWhite-300 bg-offWhite p-6 sm:p-8">
-        <p className="font-bold text-navy text-lg font-condensed tracking-wide mb-1">Get the next one</p>
+        <p className="font-bold text-navy text-lg font-condensed tracking-wide mb-1">GET THE NEXT ONE</p>
         <p className="text-sm text-navy/55 mb-5">
           One practical idea for the mental game, a couple times a month. Free, written by athletes.
         </p>

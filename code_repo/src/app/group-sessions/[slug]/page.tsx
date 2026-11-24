@@ -82,7 +82,7 @@ function RsvpForm({ session }: { session: SessionDetail }) {
     return (
       <div className="rounded-sm bg-navy p-6 text-white">
         <div className="flex items-center gap-3 mb-3">
-          <CheckCircle className="h-6 w-6 text-whistle shrink-0" />
+          <CheckCircle className="h-6 w-6 text-orange-400 shrink-0" />
           <p className="font-bold text-lg font-condensed tracking-wide">YOU&apos;RE IN</p>
         </div>
         <p className="text-sm text-white/70 leading-relaxed mb-4">{message}</p>
@@ -91,7 +91,7 @@ function RsvpForm({ session }: { session: SessionDetail }) {
             href={session.meeting_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-md inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 px-5 py-3 text-sm font-bold text-white transition-colors"
+            className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 px-5 py-3 text-sm font-bold text-white transition-colors"
           >
             <Video className="h-4 w-4" /> Join link <ExternalLink className="h-3.5 w-3.5" />
           </a>
@@ -111,7 +111,7 @@ function RsvpForm({ session }: { session: SessionDetail }) {
         <p className="text-xs text-navy/50 mb-4">Sign in to your free account to RSVP. We&apos;ll RSVP you with your account email and send the join link there.</p>
         <Link
           href={`/signin?redirect=/group-sessions/${session.slug}`}
-          className="rounded-md w-full inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 px-6 py-3 text-sm font-bold text-white transition-colors"
+          className="w-full inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 px-6 py-3 text-sm font-bold text-white transition-colors"
         >
           Sign in to RSVP <ArrowRight className="h-4 w-4" />
         </Link>
@@ -143,7 +143,7 @@ function RsvpForm({ session }: { session: SessionDetail }) {
         />
         <button
           type="submit" disabled={status === "loading"}
-          className="rounded-md w-full inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 disabled:opacity-60 px-6 py-3 text-sm font-bold text-white transition-colors"
+          className="w-full inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 disabled:opacity-60 px-6 py-3 text-sm font-bold text-white transition-colors"
         >
           {status === "loading" ? <Loader2 className="h-4 w-4 animate-spin" /> : "Reserve my spot"}
         </button>
@@ -224,15 +224,15 @@ export default function SessionDetailPage() {
           <div className="rounded-sm border border-offWhite-300 bg-white p-5 space-y-3">
             <div className="flex items-start gap-3">
               <Calendar className="h-4 w-4 text-orange-500 mt-0.5 shrink-0" />
-              <div><p className="text-xs text-navy/40 font-semibold">Date</p><p className="text-sm text-navy font-medium">{fullDate}</p></div>
+              <div><p className="text-xs text-navy/40 uppercase tracking-wider font-semibold">Date</p><p className="text-sm text-navy font-medium">{fullDate}</p></div>
             </div>
             <div className="flex items-start gap-3">
               <Clock className="h-4 w-4 text-orange-500 mt-0.5 shrink-0" />
-              <div><p className="text-xs text-navy/40 font-semibold">Time</p><p className="text-sm text-navy font-medium">{time} · {session.duration_min} min</p></div>
+              <div><p className="text-xs text-navy/40 uppercase tracking-wider font-semibold">Time</p><p className="text-sm text-navy font-medium">{time} · {session.duration_min} min</p></div>
             </div>
             <div className="flex items-start gap-3">
               <Users className="h-4 w-4 text-orange-500 mt-0.5 shrink-0" />
-              <div><p className="text-xs text-navy/40 font-semibold">Going</p><p className="text-sm text-navy font-medium">{session.rsvpCount}{session.spotsLeft != null ? ` · ${session.spotsLeft} spots left` : ""}</p></div>
+              <div><p className="text-xs text-navy/40 uppercase tracking-wider font-semibold">Going</p><p className="text-sm text-navy font-medium">{session.rsvpCount}{session.spotsLeft != null ? ` · ${session.spotsLeft} spots left` : ""}</p></div>
             </div>
           </div>
 

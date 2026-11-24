@@ -78,7 +78,7 @@ export function IcebreakerOverlay({
           <X className="h-5 w-5" />
         </button>
 
-        <p className="text-xs font-bold text-orange-500 mb-2">
+        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-orange-500 mb-2">
           {role === "mentor" ? "Say hi" : "Send your first message"}
         </p>
         <h2 className="text-2xl font-bold text-navy leading-tight">
@@ -92,7 +92,7 @@ export function IcebreakerOverlay({
 
         {role === "mentee" && chips.length > 0 && (
           <div className="mt-5 space-y-2">
-            <p className="text-xs font-bold text-navy/45">Or start with one of these</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45">Or start with one of these</p>
             <div className="flex flex-col gap-1.5">
               {chips.map((p, i) => (
                 <button

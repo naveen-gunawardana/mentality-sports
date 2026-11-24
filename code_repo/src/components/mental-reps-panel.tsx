@@ -63,7 +63,7 @@ export function MentalRepsPanel({ playerId, compact = false }: { playerId: strin
     <section className="rounded-lg border border-offWhite-300 bg-white p-5 sm:p-6">
       <div className="mb-5 flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-bold text-orange-500">Game Day</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-orange-500">Game Day</p>
           <h2 className="mt-1 text-xl font-bold text-navy">{rows && rows.length ? "Keep it going" : "Start your first routine"}</h2>
         </div>
         <div className="flex items-center gap-1.5 rounded-full bg-orange-50 px-3 py-1.5 text-sm font-bold text-orange-600" title="Days in a row with a routine">
@@ -90,11 +90,11 @@ export function MentalRepsPanel({ playerId, compact = false }: { playerId: strin
       {rows && rows.length > 0 && (
         <div className={`mt-6 grid gap-6 ${compact ? "" : "sm:grid-cols-2"}`}>
           <div>
-            <p className="mb-2 text-xs font-semibold text-navy/40">Confidence</p>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-navy/40">Confidence</p>
             <ConfidenceTrend scores={scores} />
           </div>
           <div>
-            <p className="mb-2 text-xs font-semibold text-navy/40">Recent</p>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-navy/40">Recent</p>
             <ul className="space-y-1.5">
               {rows.slice(0, 3).map((r) => (
                 <li key={r.id} className="flex justify-between gap-3 text-sm">

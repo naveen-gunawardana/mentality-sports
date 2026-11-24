@@ -41,7 +41,7 @@ export function PostSessionNudge({ sessionId, topics, role, onPick }: Props) {
           <Lightbulb className="h-3 w-3 text-white" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-bold text-navy/50">
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">
             Last session: {summary}
           </p>
           <button

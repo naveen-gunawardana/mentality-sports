@@ -243,7 +243,7 @@ export default function MentorDashboard() {
             <AvatarUpload userId={userId} name={mentorName} avatarUrl={mentorAvatarUrl} />
           )}
           <div>
-            <p className="text-xs font-bold text-orange-500">Locker room</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-orange-500">Locker room</p>
             <h1 className="text-xl font-bold text-navy tracking-tight leading-tight mt-0.5">Welcome back, {mentorName.split(" ")[0]}</h1>
           </div>
         </div>
@@ -252,7 +252,7 @@ export default function MentorDashboard() {
             type="button"
             onClick={() => setShowScheduleModal(true)}
             aria-label="Schedule a call"
-            className="md:hidden inline-flex items-center gap-1.5 rounded-full ring-1 ring-orange-300 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 h-9 text-[12px] font-bold transition-all"
+            className="md:hidden inline-flex items-center gap-1.5 rounded-full ring-1 ring-orange-300 bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 h-9 text-[12px] font-bold uppercase tracking-[0.1em] transition-all"
           >
             <CalendarClock className="h-3.5 w-3.5" />
             Call

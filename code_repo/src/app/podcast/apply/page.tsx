@@ -66,14 +66,14 @@ export default function PodcastApplyPage() {
   return (
     <div>
       {/* Hero */}
-      <div className="relative bg-[#12263A] overflow-hidden">
+      <div className="relative bg-[#0c1628] overflow-hidden">
         <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-14">
           <Link href="/podcast" className="inline-flex items-center gap-1.5 text-xs text-white/50 hover:text-white transition-colors mb-6">
             <ArrowLeft className="h-3.5 w-3.5" /> Back to the podcast
           </Link>
           <div className="flex items-center gap-3 mb-4">
-            <Mic className="h-5 w-5 text-whistle" />
-            <span className="font-bold text-xs text-whistle">
+            <Mic className="h-5 w-5 text-orange-400" />
+            <span className="font-bold text-[10px] text-orange-400 uppercase tracking-[0.3em]">
               Be a guest
             </span>
           </div>
@@ -81,7 +81,7 @@ export default function PodcastApplyPage() {
             className="font-black text-white font-condensed tracking-tight leading-none mb-4"
             style={{ fontSize: "clamp(2.4rem, 6vw, 4rem)" }}
           >
-            Get on the podcast
+            GET ON THE PODCAST
           </h1>
           <p className="max-w-xl text-white/55 text-[15px] leading-relaxed">
             Athletes, coaches, and mental performance experts — if you&apos;ve
@@ -96,7 +96,7 @@ export default function PodcastApplyPage() {
           <div className="rounded-sm border border-offWhite-300 bg-offWhite p-10 text-center">
             <CheckCircle className="h-10 w-10 text-orange-500 mx-auto mb-4" />
             <h2 className="text-2xl font-black text-navy font-condensed tracking-wide mb-2">
-              Application received
+              APPLICATION RECEIVED
             </h2>
             <p className="text-sm text-navy/60 leading-relaxed max-w-md mx-auto mb-6">
               Thanks for reaching out. We read every application and will get
@@ -106,7 +106,7 @@ export default function PodcastApplyPage() {
               href="/podcast"
               className="inline-flex items-center gap-2 rounded-sm bg-navy hover:bg-navy/90 px-6 py-3 text-sm font-semibold text-white transition-colors"
             >
-              <Mic className="h-4 w-4 text-whistle" /> Listen to episodes
+              <Mic className="h-4 w-4 text-orange-400" /> Listen to episodes
             </Link>
           </div>
         ) : (

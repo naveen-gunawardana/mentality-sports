@@ -47,7 +47,7 @@ export default function NewsletterPage() {
 
   return (
     <div>
-      <div className="rounded-md bg-navy border-b border-white/10 text-center py-2.5 px-4 text-xs text-white/60 tracking-wide">
+      <div className="bg-navy border-b border-white/10 text-center py-2.5 px-4 text-xs text-white/60 tracking-wide">
         The Mental Rep is <span className="text-white font-semibold">free</span> — a couple emails a month, unsubscribe anytime.
       </div>
 
@@ -70,17 +70,24 @@ export default function NewsletterPage() {
       )}
 
       {/* Hero */}
-      <div className="relative bg-[#12263A] overflow-hidden">
+      <div className="relative bg-[#0c1628] overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute top-1/2 right-[-2rem] -translate-y-1/2 font-black text-white/[0.03] leading-none select-none pointer-events-none font-condensed whitespace-nowrap"
+          style={{ fontSize: "clamp(7rem, 18vw, 20rem)" }}
+        >
+          MENTAL REP
+        </div>
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center gap-3 mb-5">
             <span className="block bg-orange-400 w-8 h-px" />
-            <span className="font-bold text-xs text-whistle">The newsletter</span>
+            <span className="font-bold text-[10px] text-orange-400 uppercase tracking-[0.3em]">The newsletter</span>
           </div>
           <h1
             className="font-black text-white font-condensed tracking-tight leading-none mb-5"
             style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)" }}
           >
-            The Mental Rep
+            THE MENTAL REP
           </h1>
           <p className="max-w-xl text-white/55 text-[15px] leading-relaxed mb-8">
             One practical idea for the mental game, a couple times a month — written by athletes who&apos;ve trained it for real. No fluff, no spam. Just something you can use before your next rep.
@@ -89,8 +96,8 @@ export default function NewsletterPage() {
           {/* Signup card */}
           <div className="max-w-xl rounded-sm border border-white/10 bg-white/[0.04] p-6">
             <div className="flex items-center gap-2.5 mb-4">
-              <Mail className="h-4 w-4 text-whistle" />
-              <p className="font-bold text-white text-sm font-condensed">Join the list</p>
+              <Mail className="h-4 w-4 text-orange-400" />
+              <p className="font-bold text-white text-sm font-condensed tracking-widest uppercase">Join the list</p>
             </div>
             <NewsletterSignup source="newsletter_page" theme="dark" showName />
           </div>
@@ -100,7 +107,7 @@ export default function NewsletterPage() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3 mb-8">
           <Archive className="h-5 w-5 text-orange-500" />
-          <h2 className="text-2xl font-black text-navy font-condensed tracking-wide">Past issues</h2>
+          <h2 className="text-2xl font-black text-navy font-condensed tracking-wide">PAST ISSUES</h2>
         </div>
 
         {loading ? (
@@ -120,7 +127,7 @@ export default function NewsletterPage() {
                 className="group flex flex-col rounded-sm border border-offWhite-300 bg-offWhite p-6 hover:border-orange-300 hover:bg-white transition-colors"
               >
                 {issue.sent_at && (
-                  <span className="text-xs font-medium text-navy/40 mb-2">
+                  <span className="text-[11px] font-medium text-navy/40 uppercase tracking-wider mb-2">
                     {fmtSentDate(issue.sent_at)}
                   </span>
                 )}

@@ -34,8 +34,15 @@ function CourseCard({ c, lessonCount }: { c: Course; lessonCount?: number }) {
             className="h-full w-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
           />
         ) : (
-          <div className="relative flex h-full w-full items-center justify-center bg-[#12263A]">
-            <Dumbbell className="relative h-9 w-9 text-whistle/80" />
+          <div className="relative flex h-full w-full items-center justify-center bg-[#0c1628]">
+            <div
+              aria-hidden
+              className="absolute inset-0 flex items-center justify-center font-black text-white/[0.04] leading-none select-none pointer-events-none font-condensed"
+              style={{ fontSize: "clamp(4rem, 16vw, 9rem)" }}
+            >
+              TRAIN
+            </div>
+            <Dumbbell className="relative h-9 w-9 text-orange-400/80" />
           </div>
         )}
         <div className="absolute inset-0 flex items-center justify-center bg-navy/0 group-hover:bg-navy/20 transition-colors">
@@ -128,16 +135,23 @@ export default function TrainingPage() {
 
   return (
     <div>
-      <div className="rounded-md bg-navy border-b border-white/10 text-center py-2.5 px-4 text-xs text-white/60 tracking-wide">
+      <div className="bg-navy border-b border-white/10 text-center py-2.5 px-4 text-xs text-white/60 tracking-wide">
         Courses are <span className="text-white font-semibold">launching soon</span> — free, self-paced, and built for athletes. Join the list to hear first.
       </div>
 
       {/* Hero */}
-      <div className="relative bg-[#12263A] overflow-hidden">
+      <div className="relative bg-[#0c1628] overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute top-1/2 right-[-2rem] -translate-y-1/2 font-black text-white/[0.03] leading-none select-none pointer-events-none font-condensed"
+          style={{ fontSize: "clamp(10rem, 24vw, 26rem)" }}
+        >
+          TRAIN
+        </div>
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center gap-3 mb-5">
             <span className="block bg-orange-400 w-8 h-px" />
-            <span className="font-bold text-xs text-whistle">Train the body &amp; the mind</span>
+            <span className="font-bold text-[10px] text-orange-400 uppercase tracking-[0.3em]">Train the body &amp; the mind</span>
           </div>
           <h1
             className="font-black text-white font-condensed tracking-tight leading-none mb-5"
@@ -154,19 +168,26 @@ export default function TrainingPage() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3 mb-8">
           <Dumbbell className="h-5 w-5 text-orange-500" />
-          <h2 className="text-2xl font-black text-navy font-condensed tracking-wide">Courses</h2>
+          <h2 className="text-2xl font-black text-navy font-condensed tracking-wide">COURSES</h2>
         </div>
 
         {loading ? (
           <div className="text-center py-20 text-navy/40 text-sm">Loading courses…</div>
         ) : courses.length === 0 ? (
           /* Coming-soon centerpiece */
-          <div className="relative overflow-hidden rounded-sm bg-[#12263A] px-6 py-16 sm:px-12 sm:py-20 text-center">
+          <div className="relative overflow-hidden rounded-sm bg-[#0c1628] px-6 py-16 sm:px-12 sm:py-20 text-center">
+            <div
+              aria-hidden
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-black text-white/[0.03] leading-none select-none pointer-events-none font-condensed whitespace-nowrap"
+              style={{ fontSize: "clamp(7rem, 20vw, 18rem)" }}
+            >
+              SOON
+            </div>
             <div className="relative z-10 mx-auto max-w-xl">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-orange-500/15 border border-orange-500/20 mb-6">
-                <Dumbbell className="h-7 w-7 text-whistle" />
+                <Dumbbell className="h-7 w-7 text-orange-400" />
               </div>
-              <p className="font-bold text-xs text-whistle mb-4">Coming soon</p>
+              <p className="font-bold text-[10px] text-orange-400 uppercase tracking-[0.3em] mb-4">Coming soon</p>
               <h3 className="font-black text-white font-condensed tracking-tight leading-none mb-5" style={{ fontSize: "clamp(2.2rem, 5vw, 3.4rem)" }}>
                 COURSES ARE<br />ON THE WAY
               </h3>
@@ -175,7 +196,7 @@ export default function TrainingPage() {
               </p>
               <div className="flex flex-wrap justify-center gap-2 mb-9">
                 {["Confidence reps", "Pressure routines", "Pre-game prep", "Strength blocks", "Recovery & sleep"].map((t) => (
-                  <span key={t} className="bg-white/5 px-3 py-1 border border-white/8 rounded-full text-xs text-white/45">{t}</span>
+                  <span key={t} className="bg-white/5 px-3 py-1 border border-white/8 rounded-full text-[11px] text-white/45 uppercase tracking-wider">{t}</span>
                 ))}
               </div>
               <div className="max-w-md mx-auto text-left">

@@ -341,7 +341,7 @@ export const ChatWindow = forwardRef<ChatWindowHandle, ChatWindowProps>(function
         </div>
         <div className="min-w-0">
           <p className="text-[15px] font-semibold text-navy leading-tight tracking-tight">{otherPersonName}</p>
-          <p className={`text-[10px] font-semibold mt-0.5 ${otherOnline ? "text-sage-600" : "text-navy/40"}`}>
+          <p className={`text-[10px] uppercase tracking-[0.14em] font-semibold mt-0.5 ${otherOnline ? "text-sage-600" : "text-navy/40"}`}>
             {otherOnline ? "Online now" : "Locker room chat"}
           </p>
         </div>
@@ -369,7 +369,7 @@ export const ChatWindow = forwardRef<ChatWindowHandle, ChatWindowProps>(function
             if (item.kind === "divider") {
               return (
                 <div key={item.key} className="flex justify-center py-4">
-                  <span className="text-xs font-bold text-navy/35 bg-white/80 backdrop-blur px-3 py-1 rounded-full ring-1 ring-offWhite-300">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/35 bg-white/80 backdrop-blur px-3 py-1 rounded-full ring-1 ring-offWhite-300">
                     {item.label}
                   </span>
                 </div>
@@ -388,7 +388,7 @@ export const ChatWindow = forwardRef<ChatWindowHandle, ChatWindowProps>(function
                       {isPast ? <Video className="h-4 w-4 text-slate-500" /> : <CalendarClock className="h-4 w-4 text-white" />}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold text-navy/45">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45">
                         {isPast ? "Past call" : proposedByMe ? "You scheduled a call" : `${firstName} scheduled a call`}
                       </p>
                       <p className="text-[15px] font-semibold text-navy leading-tight mt-1 tracking-tight">
