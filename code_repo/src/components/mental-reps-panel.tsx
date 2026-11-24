@@ -63,10 +63,10 @@ export function MentalRepsPanel({ playerId, compact = false }: { playerId: strin
     <section className="rounded-lg border border-offWhite-300 bg-white p-5 sm:p-6">
       <div className="mb-5 flex items-start justify-between gap-4">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-orange-500">Mental Reps</p>
-          <h2 className="mt-1 text-xl font-bold text-navy">{rows && rows.length ? "Keep stacking reps" : "Start your first rep"}</h2>
+          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-orange-500">Game Day</p>
+          <h2 className="mt-1 text-xl font-bold text-navy">{rows && rows.length ? "Keep it going" : "Start your first routine"}</h2>
         </div>
-        <div className="flex items-center gap-1.5 rounded-full bg-orange-50 px-3 py-1.5 text-sm font-bold text-orange-600" title="Days in a row with a rep">
+        <div className="flex items-center gap-1.5 rounded-full bg-orange-50 px-3 py-1.5 text-sm font-bold text-orange-600" title="Days in a row with a routine">
           <Flame className="h-4 w-4" /> {streak}
         </div>
       </div>
@@ -75,7 +75,7 @@ export function MentalRepsPanel({ playerId, compact = false }: { playerId: strin
         {REPS.map((rep) => (
           <Link
             key={rep.key}
-            href={`/reps/${rep.key}`}
+            href={`/game-day/${rep.key}`}
             className="group flex items-center justify-between rounded-md border border-offWhite-300 px-4 py-3 hover:border-orange-400 transition-colors"
           >
             <div>

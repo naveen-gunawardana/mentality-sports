@@ -3,7 +3,7 @@ export function ConfidenceTrend({ scores }: { scores: number[] }) {
   if (scores.length < 2) {
     return (
       <p className="text-xs text-muted-foreground">
-        {scores.length === 1 ? `Last: ${scores[0]}/10. One more rep and your trend shows up here.` : "Your confidence trend shows up after two reps."}
+        {scores.length === 1 ? `Last: ${scores[0]}/10. One more routine and your trend shows up here.` : "Your confidence trend shows up after two routines."}
       </p>
     );
   }
@@ -17,7 +17,7 @@ export function ConfidenceTrend({ scores }: { scores: number[] }) {
   const last = scores[scores.length - 1];
   return (
     <div>
-      <svg viewBox={`0 0 ${w} ${h}`} className="h-14 w-full" role="img" aria-label={`Confidence trend over your last ${scores.length} reps, most recent ${last} out of 10`}>
+      <svg viewBox={`0 0 ${w} ${h}`} className="h-14 w-full" role="img" aria-label={`Confidence trend over your last ${scores.length} routines, most recent ${last} out of 10`}>
         <line x1={pad} x2={w - pad} y1={y(5.5)} y2={y(5.5)} stroke="currentColor" className="text-offWhite-300" strokeDasharray="3 3" />
         <path d={d} fill="none" stroke="#C4633A" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
         <circle cx={x(scores.length - 1)} cy={y(last)} r={4} fill="#C4633A" />

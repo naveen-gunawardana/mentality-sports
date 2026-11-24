@@ -68,7 +68,7 @@ export function RepRunner({ rep, onComplete, onExit }: Props) {
         disabled={!canContinue}
         className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-md bg-navy px-4 py-3 text-sm font-semibold text-white hover:bg-navy/90 transition-colors disabled:opacity-40"
       >
-        {step.kind === "breathe" ? "Done breathing" : isLast ? "Finish rep" : "Next"}
+        {step.kind === "breathe" ? "Done breathing" : isLast ? "Finish" : "Next"}
         <ArrowRight className="h-4 w-4" />
       </button>
     </div>

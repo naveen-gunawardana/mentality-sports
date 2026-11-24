@@ -49,7 +49,7 @@ export function MentorRequestCard({ playerId, initialChallenges, initialGoal }: 
         </p>
         <p className="mt-1 text-sm text-muted-foreground">
           Mentors are volunteers, so matches happen as spots open up, and it can take a few weeks. We&apos;ll email you the
-          moment you&apos;re matched. Until then, your reps count: when you get a mentor, you can share them so they know
+          moment you&apos;re matched. Until then, your Game Day routines count: when you get a mentor, you can share them so they know
           where you&apos;re at.
         </p>
         <button onClick={() => setEditing(true)} className="mt-3 text-xs font-semibold text-navy underline underline-offset-2">

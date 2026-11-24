@@ -54,7 +54,7 @@ export default function JoinTeamPage({ params }: { params: { code: string } }) {
           <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.3em] text-orange-500">Team code {code}</p>
           <h1 className="mb-3 text-2xl font-bold text-navy">Your coach added you to Mentality Sports.</h1>
           <p className="mb-8 text-muted-foreground">
-            Free 2-minute mental reps before and after games. Your answers stay private. Your coach only sees
+            Free 2-minute Game Day routines before and after games. Your answers stay private. Your coach only sees
             team-wide numbers.
           </p>
           <Link href="/signup?role=player&from=team" className="block rounded-md bg-orange-500 px-4 py-3 font-bold text-white hover:bg-orange-400">

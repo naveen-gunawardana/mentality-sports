@@ -4,16 +4,16 @@ import { ArrowRight, Clock } from "lucide-react";
 import { REPS } from "@/lib/reps";
 
 export const metadata: Metadata = {
-  title: "Mental Reps — 2-minute mental training for athletes | Mentality Sports",
+  title: "Game Day — 2-minute mental routines for athletes | Mentality Sports",
   description:
-    "Free guided mental reps for athletes: a pre-game reset, a post-game debrief, and a bad day reset. No account needed to try one.",
-  alternates: { canonical: "/reps" },
+    "Free guided Game Day routines for athletes: a pre-game reset, a post-game debrief, and a bad day reset. No account needed to try one.",
+  alternates: { canonical: "/game-day" },
 };
 
 export default function RepsPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-      <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.3em] text-orange-500">Mental Reps</p>
+      <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.3em] text-orange-500">Game Day</p>
       <h1 className="mb-4 font-condensed text-5xl font-black italic leading-[0.95] text-navy sm:text-6xl">
         TRAIN YOUR HEAD LIKE YOU TRAIN YOUR BODY.
       </h1>
@@ -26,7 +26,7 @@ export default function RepsPage() {
         {REPS.map((rep) => (
           <Link
             key={rep.key}
-            href={`/reps/${rep.key}`}
+            href={`/game-day/${rep.key}`}
             className="group flex flex-col rounded-lg border border-offWhite-300 bg-white p-6 transition-colors hover:border-orange-400"
           >
             <p className="mb-1 text-xs font-semibold text-orange-500">{rep.when}</p>
@@ -52,7 +52,7 @@ export default function RepsPage() {
           <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-orange-400">For coaches</p>
           <p className="mt-1 text-lg font-bold">Put your whole roster on it.</p>
           <p className="text-sm text-white/60">
-            Share one team code. Your athletes do reps before games, and you see team confidence trends. Never their private answers.
+            Share one team code. Your athletes do Game Day routines before games, and you see team confidence trends. Never their private answers.
           </p>
         </div>
         <span className="inline-flex items-center gap-1 font-semibold group-hover:text-orange-300">
@@ -61,15 +61,15 @@ export default function RepsPage() {
       </Link>
 
       <div className="mt-12 rounded-lg bg-offWhite p-6 text-sm text-muted-foreground">
-        <p className="mb-1 font-semibold text-navy">Why reps?</p>
+        <p className="mb-1 font-semibold text-navy">Why a routine?</p>
         <p>
-          Confidence isn&apos;t something you have or don&apos;t. It&apos;s something you build, one rep at a time. Do a
+          Confidence isn&apos;t something you have or don&apos;t. It&apos;s something you build, one game at a time. Do a
           pre-game reset before you compete and a debrief after, and in a few weeks you&apos;ll see your own confidence
           trend instead of guessing at it. Want a real person in your corner too? Members can request a mentor who
           played your sport.
         </p>
         <p className="mt-3 text-xs">
-          Mental reps are not therapy. If you&apos;re struggling with something serious or feel unsafe, call or text 988
+          Game Day routines are not therapy. If you&apos;re struggling with something serious or feel unsafe, call or text 988
           (US) to reach someone right now.
         </p>
       </div>

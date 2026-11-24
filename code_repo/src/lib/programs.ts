@@ -29,12 +29,12 @@ export interface Program {
 export const PROGRAMS: Program[] = [
   {
     key: "reps",
-    label: "Mental Reps",
-    title: "Mental Reps",
+    label: "Game Day",
+    title: "Game Day",
     tagline: "Two minutes before and after you compete",
     description:
-      "Guided reps you run on your own: a pre-game reset, a post-game debrief, and a bad day reset. Track your confidence game to game. Free, no waiting.",
-    href: "/reps",
+      "Guided routines you run on your own: a pre-game reset, a post-game debrief, and a bad day reset. Track your confidence game to game. Free, no waiting.",
+    href: "/game-day",
     Icon: Target,
     status: "new",
   },

@@ -62,7 +62,7 @@ export function RepSession({ repKey }: { repKey: RepKey }) {
       .select("id")
       .single();
     if (error || !data) {
-      setFinish({ state: "error", message: "We couldn't save that rep. Check your connection and try again." });
+      setFinish({ state: "error", message: "We couldn't save that. Check your connection and try again." });
       return;
     }
     const { data: recent } = await supabase
@@ -79,7 +79,7 @@ export function RepSession({ repKey }: { repKey: RepKey }) {
   }
 
   if (!answers || !finish) {
-    return <RepRunner rep={rep} onComplete={complete} onExit={() => router.push(viewer.kind === "player" ? "/dashboard" : "/reps")} />;
+    return <RepRunner rep={rep} onComplete={complete} onExit={() => router.push(viewer.kind === "player" ? "/dashboard" : "/game-day")} />;
   }
 
   return (
@@ -120,8 +120,8 @@ export function RepSession({ repKey }: { repKey: RepKey }) {
             <Link href="/dashboard" className="flex-1 rounded-md bg-navy px-4 py-3 text-center text-sm font-semibold text-white hover:bg-navy/90">
               Go to Locker Room
             </Link>
-            <Link href="/reps" className="flex-1 rounded-md border border-offWhite-300 px-4 py-3 text-center text-sm font-semibold text-navy hover:bg-offWhite">
-              Another rep
+            <Link href="/game-day" className="flex-1 rounded-md border border-offWhite-300 px-4 py-3 text-center text-sm font-semibold text-navy hover:bg-offWhite">
+              Another routine
             </Link>
           </div>
         </div>
@@ -129,22 +129,22 @@ export function RepSession({ repKey }: { repKey: RepKey }) {
 
       {finish.state === "guest" && viewer.kind !== "other" && (
         <div className="mt-6 rounded-lg border border-offWhite-300 p-6">
-          <p className="mb-1 text-lg font-bold text-navy">Keep this rep.</p>
+          <p className="mb-1 text-lg font-bold text-navy">Save this.</p>
           <p className="mb-5 text-sm text-muted-foreground">
             Make a free account and we&apos;ll save it, track your confidence game to game, and keep your streak going.
             You can also ask for a mentor who played your sport.
           </p>
-          <Link href="/signup?role=player&from=rep" className="block rounded-md bg-orange-500 px-4 py-3 text-center text-sm font-bold text-white hover:bg-orange-400">
-            Save my rep, free
+          <Link href="/signup?role=player&from=gameday" className="block rounded-md bg-orange-500 px-4 py-3 text-center text-sm font-bold text-white hover:bg-orange-400">
+            Save it, free
           </Link>
-          <Link href="/reps" className="mt-3 block text-center text-sm text-muted-foreground hover:text-navy">
+          <Link href="/game-day" className="mt-3 block text-center text-sm text-muted-foreground hover:text-navy">
             Not now
           </Link>
         </div>
       )}
 
       {finish.state === "guest" && viewer.kind === "other" && (
-        <Link href="/reps" className="mt-6 block text-center text-sm font-semibold text-navy">Back to reps</Link>
+        <Link href="/game-day" className="mt-6 block text-center text-sm font-semibold text-navy">Back to Game Day</Link>
       )}
     </div>
   );

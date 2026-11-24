@@ -127,8 +127,8 @@ function SignupForm() {
         </div>
         <h1 className="text-2xl font-bold text-navy mb-1.5">Create your account</h1>
         <p className="text-sm text-muted-foreground">
-          {searchParams.get("from") === "rep"
-            ? <>Your rep is saved on this device. Make an account to keep it and track your confidence.</>
+          {searchParams.get("from") === "gameday"
+            ? <>Your routine is saved on this device. Make an account to keep it and track your confidence.</>
             : searchParams.get("from") === "team"
             ? <>Make your account and you&apos;ll be added to your team automatically.</>
             : <>One quick form and you&apos;re in. Free, always.</>}
@@ -251,9 +251,9 @@ function SignupForm() {
         </p>
         <p className="text-xs text-muted-foreground leading-relaxed">
           {role === "player"
-            ? <>Confirm your email and you&apos;re in. Your Locker Room has <strong className="text-navy/80">mental reps ready right away</strong>, and you can ask for a mentor who plays your sport from there.</>
+            ? <>Confirm your email and you&apos;re in. Your Locker Room has <strong className="text-navy/80">Game Day routines ready right away</strong>, and you can ask for a mentor who plays your sport from there.</>
             : role === "coach"
-            ? <>Confirm your email, create your team, and share the join code. Your athletes do 2-minute mental reps and you see <strong className="text-navy/80">team-level confidence trends</strong>, never anyone&apos;s private answers.</>
+            ? <>Confirm your email, create your team, and share the join code. Your athletes do 2-minute Game Day routines and you see <strong className="text-navy/80">team-level confidence trends</strong>, never anyone&apos;s private answers.</>
             : <>Confirm your email and you&apos;re in. We&apos;ll <strong className="text-navy/80">review your profile</strong> and reach out when we have an athlete for you.</>}
         </p>
       </div>

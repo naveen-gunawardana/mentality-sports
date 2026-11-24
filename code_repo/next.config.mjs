@@ -10,6 +10,9 @@ const nextConfig = {
         destination: "https://mentalitysports.com/:path*",
         permanent: true,
       },
+      // "Mental Reps" was renamed to "Game Day"; keep old links (incl. the Nov 23 email) working.
+      { source: "/reps", destination: "/game-day", permanent: true },
+      { source: "/reps/:key", destination: "/game-day/:key", permanent: true },
       {
         source: "/resources",
         destination: "/advice",

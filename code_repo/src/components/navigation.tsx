@@ -15,7 +15,7 @@ const MEDIA = [PROGRAMS_BY_KEY.podcast, PROGRAMS_BY_KEY.newsletter];
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/reps", label: "Mental Reps" },
+  { href: "/game-day", label: "Game Day" },
   { href: "/mentorship", label: "Mentorship" },
   { href: "/advice", label: "Resources" },
   { href: "/about", label: "About" },

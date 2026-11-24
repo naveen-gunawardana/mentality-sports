@@ -293,11 +293,11 @@ export default function PlayerDashboard() {
         </div>
         <div className="flex items-center gap-2">
         <Link
-          href="/reps"
+          href="/game-day"
           className="inline-flex items-center gap-1.5 rounded-full ring-1 ring-navy/15 bg-white hover:bg-offWhite text-navy px-3 h-9 text-[12px] font-bold uppercase tracking-[0.1em] transition-all"
         >
           <Flame className="h-3.5 w-3.5 text-orange-500" />
-          Reps
+          Game Day
         </Link>
         <button
           type="button"

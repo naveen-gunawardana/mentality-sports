@@ -73,7 +73,7 @@ export default function CoachDashboard() {
           <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-orange-500">Coach</p>
           <h1 className="text-3xl font-bold text-navy">Hey {name}.</h1>
           <p className="mt-1 max-w-xl text-sm text-muted-foreground">
-            Your athletes do 2-minute mental reps before and after games. You see team totals and how confident the
+            Your athletes do 2-minute Game Day routines before and after games. You see team totals and how confident the
             team feels. Never anyone&apos;s private answers.
           </p>
         </div>
@@ -109,7 +109,7 @@ export default function CoachDashboard() {
         {teams.map((t) => {
           const url = teamJoinUrl(t.code, typeof window !== "undefined" ? window.location.origin : undefined);
           const thisWeek = t.weeks.find((w) => w.week === currentWeekStart());
-          const shareText = `Join ${t.name} on Mentality Sports: free 2-minute mental reps before and after games. Your answers stay private. ${url}`;
+          const shareText = `Join ${t.name} on Mentality Sports: free 2-minute Game Day routines before and after games. Your answers stay private. ${url}`;
           return (
             <section key={t.id} className="rounded-lg border border-offWhite-300 bg-white p-6">
               <div className="flex flex-wrap items-start justify-between gap-4">
@@ -136,12 +136,12 @@ export default function CoachDashboard() {
               </div>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                <Stat label="Reps this week" value={thisWeek ? String(thisWeek.reps) : "0"} />
+                <Stat label="Routines this week" value={thisWeek ? String(thisWeek.reps) : "0"} />
                 <Stat label="Athletes active this week" value={thisWeek ? `${thisWeek.athletes}/${t.members}` : `0/${t.members}`} />
                 <Stat
                   label="Team confidence"
                   value={thisWeek?.avg_confidence != null ? `${thisWeek.avg_confidence}/10` : "—"}
-                  note={thisWeek && thisWeek.avg_confidence == null ? "Shows once 3+ athletes log reps in a week" : undefined}
+                  note={thisWeek && thisWeek.avg_confidence == null ? "Shows once 3+ athletes log routines in a week" : undefined}
                 />
               </div>
 
@@ -149,7 +149,7 @@ export default function CoachDashboard() {
                 <table className="mt-6 w-full text-sm">
                   <thead>
                     <tr className="text-left text-xs uppercase tracking-wider text-navy/40">
-                      <th className="py-1 font-semibold">Week of</th><th className="font-semibold">Reps</th><th className="font-semibold">Athletes</th><th className="font-semibold">Confidence</th>
+                      <th className="py-1 font-semibold">Week of</th><th className="font-semibold">Routines</th><th className="font-semibold">Athletes</th><th className="font-semibold">Confidence</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -166,7 +166,7 @@ export default function CoachDashboard() {
               {t.members === 0 && (
                 <p className="mt-6 rounded-md bg-offWhite p-4 text-sm text-muted-foreground">
                   Next step: drop the join link in your team chat and ask everyone to do the{" "}
-                  <Link href="/reps/pregame" className="font-semibold text-navy underline">Pre-Game Reset</Link> before your next game.
+                  <Link href="/game-day/pregame" className="font-semibold text-navy underline">Pre-Game Reset</Link> before your next game.
                 </p>
               )}
             </section>

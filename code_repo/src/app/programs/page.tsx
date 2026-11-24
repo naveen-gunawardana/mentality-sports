@@ -124,7 +124,7 @@ export default function ProgramsPage() {
     <div>
       {/* Announcement bar */}
       <div className="bg-navy border-b border-white/10 text-center py-2.5 px-4 text-xs text-white/60 tracking-wide">
-        New: <span className="text-white font-semibold">Mental Reps</span>, two-minute mental training you can use before and after every game.{" "}
+        New: <span className="text-white font-semibold">Game Day</span>, two-minute mental routines you can use before and after every game.{" "}
         <span className="text-orange-400 font-semibold">All free.</span>
       </div>
 
@@ -151,7 +151,7 @@ export default function ProgramsPage() {
             Everything We Do
           </h1>
           <p className="max-w-2xl text-[15px] leading-relaxed text-white/55">
-            Start with a mental rep: two minutes before you compete, three questions after. Add a
+            Start with Game Day: two minutes before you compete, three questions after. Add a
             mentor who&apos;s lived the same battles when you want a person in your corner. The
             resource library, newsletter, and podcast cover the rest. Every one of them is free.
           </p>

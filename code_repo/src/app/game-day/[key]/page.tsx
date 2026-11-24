@@ -11,9 +11,9 @@ export function generateMetadata({ params }: { params: { key: string } }): Metad
   if (!isRepKey(params.key)) return {};
   const rep = REPS_BY_KEY[params.key];
   return {
-    title: `${rep.title} — Mental Reps | Mentality Sports`,
+    title: `${rep.title} — Game Day | Mentality Sports`,
     description: rep.blurb,
-    alternates: { canonical: `/reps/${rep.key}` },
+    alternates: { canonical: `/game-day/${rep.key}` },
   };
 }
 

@@ -39,6 +39,8 @@ export default function AdminPage() {
   const [nudges, setNudges] = useState<{ matchId: string; playerName: string; mentorName: string; matchCreatedAt: string | null; daysSince: number | null }[]>([]);
   const [allSessions, setAllSessions] = useState<{ id: string; date: string | null; match_id: string }[]>([]);
   const [loading, setLoading] = useState(true);
+  const [coachCount, setCoachCount] = useState(0);
+  const [gameDay, setGameDay] = useState<{ routinesThisWeek: number; athletesThisWeek: number; routinesAllTime: number; teams: number; teamMembers: number } | null>(null);
   const [expandedPlayerId, setExpandedPlayerId] = useState<string | null>(null);
   const [expandedMentorId, setExpandedMentorId] = useState<string | null>(null);
   const [matchingPlayer, setMatchingPlayer] = useState<Person | null>(null);
@@ -64,11 +66,13 @@ export default function AdminPage() {
   async function load() {
     const res = await fetch("/api/admin/data");
     if (!res.ok) { setLoading(false); return; }
-    const { profiles, matches: rawMatches, sessions, articles } = await res.json();
+    const { profiles, matches: rawMatches, sessions, articles, gameDay: gd } = await res.json();
+    setGameDay(gd ?? null);
 
     const all = (profiles ?? []) as unknown as Person[];
     setPlayers(all.filter(p => p.role === "player"));
     setMentors(all.filter(p => p.role === "mentor"));
+    setCoachCount(all.filter(p => p.role === "coach").length);
 
     const typedMatches = (rawMatches ?? []) as unknown as Match[];
     setMatches(typedMatches);
@@ -330,6 +334,27 @@ export default function AdminPage() {
           ))}
         </div>
       </div>
+
+      {gameDay && (
+        <div className="mb-8 rounded-lg border border-orange-200 bg-orange-50 px-5 py-4">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.25em] text-orange-600">Game Day: the number that matters</p>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-6">
+            {[
+              { label: "Athletes active (7d)", value: gameDay.athletesThisWeek },
+              { label: "Routines (7d)", value: gameDay.routinesThisWeek },
+              { label: "Routines all time", value: gameDay.routinesAllTime },
+              { label: "Coaches", value: coachCount },
+              { label: "Teams", value: gameDay.teams },
+              { label: "Athletes on teams", value: gameDay.teamMembers },
+            ].map(s => (
+              <div key={s.label}>
+                <p className="text-2xl font-bold text-navy tabular-nums">{s.value}</p>
+                <p className="text-xs text-muted-foreground">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Delete confirmation overlay */}
       {confirmDeleteId && (

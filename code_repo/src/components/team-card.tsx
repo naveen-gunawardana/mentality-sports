@@ -67,7 +67,7 @@ export function TeamCard({ playerId }: { playerId: string }) {
         <p className="mt-1 text-sm text-muted-foreground">If your coach gave you a team code, enter it here.</p>
       )}
       <p className="mt-2 text-xs text-muted-foreground">
-        Your coach only sees team totals, like how many reps the team did. Never your answers.
+        Your coach only sees team totals, like how many routines the team did. Never your answers.
       </p>
       <form
         className="mt-3 flex gap-2"
